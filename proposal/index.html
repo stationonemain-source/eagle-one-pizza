@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eagle One Pizza Proposal</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<style>
+/* A proposal is a document: warm box-board paper, the brand's navy and red used sparingly,
+   the new site embedded where the owners can scroll it. Headings in the site's own slab; reading in Libre Franklin. */
+:root{
+  --bg:#FBF7EE; --bg-2:#F2EADA; --ink:#1B1A17; --ink-2:#4A453C; --ink-3:#6B6356; --line:#E2D8C4; --line-2:#CFC2A8;
+  --navy:#16284A; --on-navy:#F4EFE3; --on-navy-2:#C3CDE0; --red:#B81D2A; --red-bg:#FBE7E6; --amber:#8A5A00; --amber-bg:#FBF0D6;
+  --green:#1F6B39; --green-bg:#E2F2E6; --blue:#1F4E8C; --blue-bg:#E3ECF8; --shot:#0F1D38;
+  --display:"Alfa Slab One","Rockwell Extra Bold",Rockwell,Georgia,serif;
+  --body:"Libre Franklin","Franklin Gothic Medium",Arial,sans-serif;
+  --gut:clamp(16px,4vw,48px); --max:1060px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151B; --bg-2:#1A1F28; --ink:#EEE9DE; --ink-2:#C9C2B5; --ink-3:#A39B8D; --line:#2A303B; --line-2:#3A4250;
+  --navy:#0C1730; --on-navy:#F4EFE3; --on-navy-2:#AFBBD3; --red:#FF7A80; --red-bg:#3A1A1D; --amber:#F2C065; --amber-bg:#35291A;
+  --green:#7FD39A; --green-bg:#16301F; --blue:#8DB6F0; --blue-bg:#172538; --shot:#070D1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151B; --bg-2:#1A1F28; --ink:#EEE9DE; --ink-2:#C9C2B5; --ink-3:#A39B8D; --line:#2A303B; --line-2:#3A4250;
+  --navy:#0C1730; --on-navy:#F4EFE3; --on-navy-2:#AFBBD3; --red:#FF7A80; --red-bg:#3A1A1D; --amber:#F2C065; --amber-bg:#35291A;
+  --green:#7FD39A; --green-bg:#16301F; --blue:#8DB6F0; --blue-bg:#172538; --shot:#070D1C; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.label{font:800 12px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+h2{font-size:clamp(32px,4.2vw,48px);line-height:1.04;margin:8px 0 18px}
+h3{font-size:clamp(19px,1.8vw,22px);line-height:1.2;margin-bottom:8px}
+p{margin:0 0 14px;max-width:66ch}
+section{padding-block:clamp(52px,7vw,84px) 0}
+.num{font-variant-numeric:tabular-nums}
+
+.cover{background:var(--navy);color:var(--on-navy);padding-block:clamp(34px,6vw,64px) clamp(40px,6vw,68px);border-bottom:6px solid #C8202F}
+.cover .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:clamp(36px,6vw,72px)}
+.cover .label{color:var(--on-navy-2)}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font:400 21px/1 var(--display)}
+.brand svg{width:40px;height:40px;flex:none}
+.cover h1{font-size:clamp(40px,6.6vw,84px);line-height:1;color:#fff}
+.cover h1 em{font-style:normal;color:#FF8A8F}
+.cover p{color:var(--on-navy-2);font-size:clamp(18px,1.6vw,21px);margin-top:22px;max-width:56ch}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,5vw,52px);border-top:1px solid rgba(244,239,227,.22);padding-top:18px}
+.meta .label{display:block;margin-bottom:6px}
+.meta b{font:600 15px/1.35 var(--body);color:#fff}
+@media (max-width:700px){.meta{grid-template-columns:1fr 1fr}}
+
+.toc{display:flex;flex-wrap:wrap;gap:8px;padding-block:22px;border-bottom:1px solid var(--line)}
+.toc a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;font:700 14px/1 var(--body);color:var(--ink);text-decoration:none}
+.toc a:hover{border-color:var(--ink)}
+
+.clock{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,3vw,32px);align-items:center;background:var(--red-bg);border:1px solid var(--line);border-left:6px solid var(--red);padding:clamp(18px,3vw,28px);margin-top:8px}
+.clock .days{font:400 clamp(48px,7vw,80px)/1 var(--display);color:var(--red)}
+.clock .days small{display:block;font:800 12px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.clock p{margin:0;color:var(--ink-2)}
+.clock p b{color:var(--ink)}
+@media (max-width:560px){.clock{grid-template-columns:1fr}}
+
+.summary{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.summary>div{min-width:0}
+.total{background:var(--bg-2);border:1px solid var(--line);padding:24px}
+.total .big{font:400 clamp(44px,5vw,60px)/1 var(--display);display:block;margin:8px 0 6px}
+.total .sub{font:600 14px/1.45 var(--body);color:var(--ink-2)}
+.total ul{margin:16px 0 0;padding-left:18px;font-size:16px;color:var(--ink-2)}
+@media (max-width:800px){.summary{grid-template-columns:1fr}}
+
+.screen{margin-top:22px;overflow:hidden;background:var(--shot);box-shadow:0 30px 60px -24px rgba(15,29,56,.5),0 0 0 1px var(--line)}
+.chrome{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#0B1528;color:#AFBBD3;font:600 12.5px/1 var(--body)}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#2A3A5A}
+.url{flex:1;min-width:0;background:#06101F;border-radius:6px;padding:8px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chrome a{color:#fff;text-decoration:none;border:1px solid #2A3A5A;border-radius:6px;padding:0 10px;white-space:nowrap;min-height:32px;display:inline-flex;align-items:center}
+.screen iframe{display:block;width:100%;height:min(78vh,760px);border:0;background:#F7F1E4}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;font:800 14px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);color:var(--ink);border-radius:6px}
+.btn-ink{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn:hover{opacity:.88}
+
+.built{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.built div{border:1px solid var(--line);padding:20px;min-width:0}
+.built p{font-size:16px;color:var(--ink-2);margin:0}
+@media (max-width:820px){.built{grid-template-columns:1fr}}
+
+.score{display:flex;flex-wrap:wrap;align-items:center;gap:28px;border:1px solid var(--line);padding:22px;margin:18px 0 22px}
+.score .big{font:400 64px/1 var(--display)}.score .big small{font:700 14px/1 var(--body);color:var(--ink-3);margin-left:6px}
+.bars{flex:1;min-width:240px;display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 34px;gap:12px;align-items:center;font-size:14.5px}
+.bar i{display:block;height:8px;background:var(--bg-2);position:relative}
+.bar i b{position:absolute;inset:0 auto 0 0;background:var(--navy)}
+:root[data-theme="dark"] .bar i b{background:var(--blue)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bar i b{background:var(--blue)}}
+.bar span:last-child{font:700 14px/1 var(--body);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.bar{grid-template-columns:110px minmax(0,1fr) 30px}}
+
+.findings{display:grid;gap:12px}
+.finding{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:18px 20px;border:1px solid var(--line)}
+.finding.good{background:var(--green-bg)}
+.finding h3{font-size:20px;margin:0 0 6px}
+.finding p{margin:0;font-size:16.5px;color:var(--ink-2)}
+@media (max-width:640px){.finding{grid-template-columns:1fr;gap:8px}}
+.pill{display:inline-block;align-self:start;justify-self:start;padding:5px 9px;border-radius:999px;font:800 11.5px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.bad{background:var(--red-bg);color:var(--red)}.ask{background:var(--amber-bg);color:var(--amber)}.ok{background:var(--green-bg);color:var(--green)}.info{background:var(--blue-bg);color:var(--blue)}
+
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.people div{border:1px solid var(--line);padding:18px;min-width:0}
+.people b{display:block;font:400 19px/1.2 var(--display);margin-bottom:6px}
+.people q{display:block;font-style:italic;color:var(--ink);margin:8px 0}
+.people p{font-size:15.5px;color:var(--ink-2);margin:0}
+@media (max-width:760px){.people{grid-template-columns:1fr}}
+
+.scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);padding:22px;min-width:0}
+.card ul{margin:10px 0 0;padding-left:18px;font-size:16px;color:var(--ink-2)}
+.card li{margin-bottom:4px}
+@media (max-width:760px){.scope{grid-template-columns:1fr}}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:16px;min-width:600px}
+th{text-align:left;font:800 12px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:var(--bg-2);padding:12px 16px;border-bottom:1px solid var(--line)}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+td small{display:block;color:var(--ink-2);font-size:15px;margin-top:2px}
+tr:last-child td{border-bottom:0}
+.price-tbl td:last-child,.price-tbl th:last-child{text-align:right;white-space:nowrap}
+.price-tbl tfoot td{font:700 17px/1.3 var(--body);background:var(--bg-2);border-top:2px solid var(--ink)}
+
+.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--line-2)}
+.steps li{position:relative;padding:0 0 22px 24px}
+.steps li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}
+.steps b{font:700 17px/1.3 var(--body);display:block}
+.steps span{font-size:16px;color:var(--ink-2)}
+
+.need{columns:2 320px;column-gap:28px;padding-left:20px}
+.need li{break-inside:avoid;margin-bottom:10px;font-size:17px}
+
+.yes{margin-top:clamp(52px,7vw,84px);background:var(--navy);color:var(--on-navy);padding-block:clamp(44px,6vw,68px)}
+.yes h2{color:#fff}.yes p{color:var(--on-navy-2)}
+.yes .btn{border-color:var(--on-navy);color:#fff}
+footer{padding-block:28px;font:400 13px/1.6 var(--body);color:var(--ink-3);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="badge" viewBox="0 0 120 120">
+    <path d="M18 56c-10-4-16-12-16-12s10 1 18 4c-6-5-10-12-10-12s10 3 17 9c-3-5-4-11-4-11s8 5 12 12z" fill="#2E6BD6"/>
+    <path d="M102 56c10-4 16-12 16-12s-10 1-18 4c6-5 10-12 10-12s-10 3-17 9c3-5 4-11 4-11s-8 5-12 12z" fill="#2E6BD6"/>
+    <circle cx="60" cy="58" r="44" fill="#C8202F" stroke="#fff" stroke-width="3"/>
+    <path d="M33 38h54L60 94z" fill="#FFF6E2" stroke="#16284A" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="47" cy="47" r="7" fill="#C8202F" stroke="#16284A" stroke-width="2"/><circle cx="73" cy="47" r="7" fill="#C8202F" stroke="#16284A" stroke-width="2"/><circle cx="60" cy="70" r="7" fill="#C8202F" stroke="#16284A" stroke-width="2"/>
+    <text x="60" y="61" text-anchor="middle" font-family="Alfa Slab One,Georgia,serif" font-size="22" fill="#16284A">1</text>
+  </symbol></defs></svg>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="top">
+      <span class="brand"><svg aria-hidden="true"><use href="#badge"/></svg>Eagle One Pizza</span>
+      <span class="label">Proposal &middot; prepared by Station.Solutions</span>
+    </div>
+    <h1>Seven stores people love. <em>One website from 2012.</em></h1>
+    <p>This is everything in one place: the new site we have already built for Eagle One, what we found on the current one, the ordering deadline coming in April, and exactly what it takes to launch.</p>
+    <div class="meta">
+      <div><span class="label">Prepared for</span><b>The owners<br>Eagle One Pizza</b></div>
+      <div><span class="label">Prepared by</span><b>Station.Solutions</b></div>
+      <div><span class="label">Date</span><b>29 September 2026</b></div>
+      <div><span class="label">Valid until</span><b>29 October 2026</b></div>
+    </div>
+  </div>
+</header>
+
+<nav class="wrap toc" aria-label="Contents">
+  <a href="#summary">Summary</a><a href="#deadline">The deadline</a><a href="#site">See the site</a><a href="#built">What&rsquo;s built</a><a href="#found">What we found</a><a href="#people">How it reads</a><a href="#plan">The plan</a><a href="#price">Investment</a><a href="#when">Timeline</a><a href="#need">What we need</a>
+</nav>
+
+<main>
+<section id="summary" aria-labelledby="sum-h">
+  <div class="wrap summary">
+    <div>
+      <span class="label">The short version</span>
+      <h2 id="sum-h">The pizza is ahead of the website.</h2>
+      <p>Eagle One has 6,027 Google reviews across seven stores, ratings from 4.3 to 4.6, and the first map result for &ldquo;pizza&rdquo; in six of its seven towns. The website still has its 2012 design. The menu is a picture, a phone shows it at desktop size, and the newest photo on it was taken in June 2012.</p>
+      <p>The bigger problem is the one behind every &ldquo;Order Online&rdquo; button. It runs on GloriaFood, and GloriaFood shuts down on 30 April 2027. We have already built the replacement site. It&rsquo;s live below as a private preview. What&rsquo;s left is to move ordering to a system that isn&rsquo;t closing, put the real menu and photos in, and switch eagleonepizza.com over.</p>
+    </div>
+    <div class="total" role="group" aria-label="Total">
+      <span class="label">To launch</span>
+      <span class="big num">$3,500</span>
+      <span class="sub">one time &middot; hosting &amp; care quoted monthly</span>
+      <ul>
+        <li>The new website on eagleonepizza.com</li>
+        <li>A page for every store, and a menu in text</li>
+        <li>Online ordering moved off GloriaFood for all seven stores</li>
+        <li>Seven Google listings cleaned up and pointed at their stores</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="deadline" aria-labelledby="dl-h">
+  <div class="wrap">
+    <span class="label">The deadline</span>
+    <h2 id="dl-h">Online ordering switches off in April</h2>
+    <div class="clock">
+      <div class="days num"><span id="days">213</span><small>days to 30 April 2027</small></div>
+      <div>
+        <p>GloriaFood&rsquo;s own homepage says the service <b>&ldquo;will reach end of life on April 30, 2027&rdquo;</b>, and Oracle, which owns it, offers no direct replacement. On that day all fourteen &ldquo;Order Online&rdquo; buttons on your site stop working, at every store.</p>
+        <p>The menus, customer list and order history inside it go with it unless they are exported first. Moving in the slow months is easy. Moving in April, with every other GloriaFood restaurant trying to do the same, is not.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="site" aria-labelledby="site-h">
+  <div class="wrap">
+    <span class="label">Already built &middot; private preview</span>
+    <h2 id="site-h">See the new site</h2>
+    <p>Scroll it right here, or open it full size. Pick your store, read the menu, and see which stores are open right now. It&rsquo;s hidden from Google until launch, and the order buttons go to each store&rsquo;s current ordering page.</p>
+    <div class="screen">
+      <div class="chrome"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">eagleonepizza.com &middot; preview</span><a href="../" target="_blank" rel="noopener">Open full size &#8599;</a></div>
+      <iframe src="../" title="Preview of the new Eagle One Pizza website" loading="lazy"></iframe>
+    </div>
+    <div class="row">
+      <a class="btn btn-ink" href="../" target="_blank" rel="noopener">Open the new site</a>
+      <a class="btn" href="../audit/" target="_blank" rel="noopener">Read the full audit</a>
+    </div>
+  </div>
+</section>
+
+<section id="built" aria-labelledby="built-h">
+  <div class="wrap">
+    <span class="label">What&rsquo;s in the preview</span>
+    <h2 id="built-h">Three things your current site can&rsquo;t do</h2>
+    <div class="built">
+      <div><h3>Knows which store you mean</h3><p>Pick your store once and every Order and Call button follows it. The locations list shows which of the seven stores are open right now on Oklahoma time, and when each one closes.</p></div>
+      <div><h3>A menu Google can read</h3><p>Every pizza, gyro, calzone and side in text, with prices, so Google and AI assistants can answer &ldquo;how much is a large pizza at Eagle One&rdquo;. One menu feeds the site and the ordering system, so the prices stop disagreeing.</p></div>
+      <div><h3>Your own pizzas, full size</h3><p>The photos are Eagle One&rsquo;s own 2012 gallery pictures of real pies in your boxes and on your star plates, restored from 333 pixels to full size. A new photo shoot would replace them.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="found" aria-labelledby="found-h">
+  <div class="wrap">
+    <span class="label">Audit of eagleonepizza.com and your seven Google listings &middot; 29 September 2026</span>
+    <h2 id="found-h">What we found</h2>
+    <p>Every point below was checked on the live site, in the ordering system and in Google&rsquo;s own business data. The score measures how easily a hungry person can find you and get an order in. It says nothing about the pizza.</p>
+    <div class="score">
+      <span class="big num">65<small>of 100</small></span>
+      <div class="bars">
+        <div class="bar"><span>Google listings</span><i><b style="width:68%"></b></i><span>68</span></div>
+        <div class="bar"><span>Reviews</span><i><b style="width:97%"></b></i><span>97</span></div>
+        <div class="bar"><span>Website</span><i><b style="width:61%"></b></i><span>61</span></div>
+        <div class="bar"><span>Local search</span><i><b style="width:46%"></b></i><span>46</span></div>
+        <div class="bar"><span>Tools &amp; tracking</span><i><b style="width:25%"></b></i><span>25</span></div>
+      </div>
+    </div>
+    <div class="findings">
+      <div class="finding good"><span class="pill ok">Good news</span><div><h3>A reputation most chains would pay for</h3><p>6,027 Google reviews, and Google&rsquo;s first map result for &ldquo;pizza&rdquo; in Midwest City, Harrah, Norman, north OKC, Lexington and Holdenville. The site is also clean: no malware, no planted spam links, and names, addresses and phones match Google at every store.</p></div></div>
+      <div class="finding"><span class="pill bad">Ordering</span><div><h3>The ordering system closes on 30 April 2027</h3><p>All fourteen Order Online buttons open GloriaFood. Nothing replaces it automatically, and the menus and customer list inside it go when it does.</p></div></div>
+      <div class="finding"><span class="pill bad">Menu</span><div><h3>The menu is a picture, and the prices disagree</h3><p>Every price is inside two flyer images. A large one-topping pizza is $6.99 in one, $10.99 in the other and $8.99 in the ordering menu. The ordering page shows a 10% pick-up deal right above a 35% pick-up deal.</p></div></div>
+      <div class="finding"><span class="pill bad">Phones</span><div><h3>A shrunken desktop page on every phone</h3><p>No page has a mobile layout, so body text lands at about 5 pixels tall. &ldquo;Call us&rdquo; on the homepage opens the ordering page instead of the phone. Speed on mobile scores 57 of 100.</p></div></div>
+      <div class="finding"><span class="pill ask">Google</span><div><h3>Seven listings, one homepage</h3><p>Every listing links the same homepage, six over the old http address. Lexington is filed as &ldquo;Restaurant&rdquo;, not pizza. The Norman listing carries a review about a nail salon. The 2023 Readers&rsquo; Choice award appears only inside a flyer image.</p></div></div>
+      <div class="finding"><span class="pill info">Tracking</span><div><h3>Nothing counted since 2023</h3><p>The only analytics tag is Universal Analytics, which Google switched off in July 2023. There is no email or text list, so online customers can&rsquo;t be invited back.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="people" aria-labelledby="people-h">
+  <div class="wrap">
+    <span class="label">How the site reads today</span>
+    <h2 id="people-h">Four people deciding where dinner comes from</h2>
+    <div class="people">
+      <div><b>An OU student in Norman at 9 PM</b><q>&ldquo;Are they still open?&rdquo;</q><p>On a phone they get a tiny desktop page and seven stores on one Directions page. The new site shows Norman&rsquo;s hours, open or closed, and an Order button in the first screen.</p></div>
+      <div><b>A parent feeding a team</b><q>&ldquo;What do six large pizzas cost?&rdquo;</q><p>Your prices are your best argument, and today they&rsquo;re locked in a picture with three different numbers. The new menu states them once, with the pick-up deal beside them.</p></div>
+      <div><b>Someone who eats gluten-free</b><q>&ldquo;Do they actually have a crust for me?&rdquo;</q><p>You offer gluten-free and cauliflower crusts. The new site says so in text, where search and AI assistants can find it.</p></div>
+      <div><b>A first-timer comparing you to a chain</b><q>&ldquo;Is this place still around?&rdquo;</q><p>A 2012 layout and 2012 photos make a thriving business look tired. The new site looks like the seven-store family business with 6,000 reviews that you are.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="plan" aria-labelledby="plan-h">
+  <div class="wrap">
+    <span class="label">Scope</span>
+    <h2 id="plan-h">The plan</h2>
+    <div class="scope">
+      <div class="card"><h3>1. Finish the website</h3><ul>
+        <li>A page for each of the seven stores, with its hours, phone, delivery area and photo</li>
+        <li>The full menu in text, one list for all stores, with any store-by-store price differences</li>
+        <li>A new photo shoot to replace the restored 2012 photos, if you want one</li>
+        <li>Your approval on every word, price and deal</li>
+      </ul></div>
+      <div class="card"><h3>2. Move online ordering</h3><ul>
+        <li>Export menus, customers and order history from GloriaFood for all seven stores</li>
+        <li>Set up ordering on a system that isn&rsquo;t closing, chosen with you before any work starts</li>
+        <li>Menus, deals, delivery zones and store hours rebuilt and tested with a real order at each store</li>
+        <li>Every button switched over well before 30 April 2027</li>
+      </ul></div>
+      <div class="card"><h3>3. Get found</h3><ul>
+        <li>Seven Google listings: each linked to its own store page over https, Lexington filed as a pizza restaurant, fresh photos, the nail-salon review reported</li>
+        <li>Restaurant details and menu marked up for Google and AI assistants</li>
+        <li>Google Analytics 4, so you can see how many orders start on the site</li>
+      </ul></div>
+      <div class="card"><h3>4. Launch on eagleonepizza.com</h3><ul>
+        <li>Move the site onto your domain with a secure connection</li>
+        <li>Old page addresses forward to the right new pages, so no links break</li>
+        <li>The Weebly site retired once the new one is confirmed live</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="price" aria-labelledby="price-h">
+  <div class="wrap">
+    <span class="label">Investment</span>
+    <h2 id="price-h">What it costs</h2>
+    <div class="tbl-wrap">
+      <table class="price-tbl">
+        <thead><tr><th scope="col">Item</th><th scope="col">When</th><th scope="col">Price</th></tr></thead>
+        <tbody>
+          <tr><td><b>Website, finished and launched</b><small>Seven store pages, text menu, build-a-pizza, deals, Google listings and search setup, domain move</small></td><td>One time</td><td class="num">Included</td></tr>
+          <tr><td><b>Online ordering move</b><small>Export from GloriaFood, set-up and testing at all seven stores, buttons switched</small></td><td>One time</td><td class="num">Included</td></tr>
+          <tr><td><b>Hosting &amp; care</b><small>Hosting, domain renewal, menu and price updates, security</small></td><td>Monthly, from launch</td><td>Quoted with you</td></tr>
+          <tr><td><b>Ordering system fees</b><small>Whatever the chosen ordering provider charges, billed by them. We&rsquo;ll lay out the options and their costs before you choose.</small></td><td>From switch-over</td><td>Provider&rsquo;s price</td></tr>
+          <tr><td><b>Professional photography</b> (optional)<small>Food and storefronts, one shoot across the stores. We arrange it; the photographer bills directly.</small></td><td>If you want it</td><td>Photographer&rsquo;s quote</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total to launch</td><td>Half to start, half at launch</td><td class="num">$3,500</td></tr></tfoot>
+      </table>
+    </div>
+    <p style="margin-top:14px;font-size:16px;color:var(--ink-2)">No setup fees and nothing hidden. The preview you see is included in the launch price.</p>
+  </div>
+</section>
+
+<section id="when" aria-labelledby="when-h">
+  <div class="wrap">
+    <span class="label">Timeline</span>
+    <h2 id="when-h">About four weeks, and months ahead of April</h2>
+    <ol class="steps">
+      <li><b>Week 1 &middot; You say yes</b><span>First invoice, a 30-minute call to go through the site, and the GloriaFood export.</span></li>
+      <li><b>Days 1&ndash;3 &middot; Google listings</b><span>Lexington&rsquo;s category, https links, the Norman review, and analytics turned on.</span></li>
+      <li><b>Weeks 1&ndash;3 &middot; Menu, stores and ordering</b><span>Store pages, the menu confirmed price by price, the new ordering system set up and tested at every store.</span></li>
+      <li><b>Week 4 &middot; Review and launch</b><span>You approve every page, eagleonepizza.com switches over, and all seven listings point to their new pages.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="need" aria-labelledby="need-h">
+  <div class="wrap">
+    <span class="label">From you</span>
+    <h2 id="need-h">What we need</h2>
+    <ul class="need">
+      <li>Access to <b>GloriaFood</b> for each store, so we can export menus, customers and order history.</li>
+      <li>The <b>current menu and prices</b> for each store, and which deals are still running.</li>
+      <li>Each store&rsquo;s <b>delivery area</b>, and which stores have a drive-thru.</li>
+      <li>A few lines on <b>the family and the story</b>: when and where Eagle One started.</li>
+      <li>The original <b>logo artwork</b>, if you have it.</li>
+      <li>Access to your seven <b>Google Business Profiles</b> and your <b>domain</b>. We walk you through sharing access safely, without passwords.</li>
+      <li>Who at each store should get <b>online orders</b>, and on what: tablet, printer, email or text.</li>
+      <li>A day for a <b>photo shoot</b>, if you want one.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="yes" aria-labelledby="yes-h">
+  <div class="wrap">
+    <h2 id="yes-h">Ready when you are</h2>
+    <p>Reply to the email this came with and we&rsquo;ll set up the call. Want changes to the design first? Tell us what, and we&rsquo;ll make them before you decide.</p>
+    <div class="row"><a class="btn" href="../" target="_blank" rel="noopener">Open the new site</a><a class="btn" href="../audit/" target="_blank" rel="noopener">Read the full audit</a></div>
+  </div>
+</section>
+</main>
+
+<div class="wrap"><footer><span>Station.Solutions &middot; proposal for Eagle One Pizza &middot; 29 September 2026 &middot; valid for 30 days</span><span>Private preview. Not indexed by search engines.</span></footer></div>
+
+<script>
+(() => { const d = Math.ceil((Date.UTC(2027,3,30) - Date.now()) / 864e5); const el = document.getElementById('days'); if (el && d > 0) el.textContent = d; })();
+</script>
+
+</body>
+</html>

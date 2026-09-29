@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<title>Eagle One Pizza Business Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F2ED;
+    --card:#FFFFFF;
+    --ink:#16181d;
+    --ink-2:#4a4e57;
+    --muted:#8e929c;
+    --amber:#FFB000;
+    --green:#2FBF71;
+    --hairline:rgba(22,24,29,.12);
+    --hairline-soft:rgba(22,24,29,.07);
+    --radius:10px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .page{
+    max-width:740px;
+    margin:0 auto;
+    padding:0 20px 56px;
+  }
+
+  /* ---------- utility type ---------- */
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .eyebrow--amber{color:#B87F00;}
+
+  .sec-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.14em;
+    color:var(--muted);
+  }
+
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin:0 0 18px;
+  }
+
+  .sec-head .rule{
+    flex:1;
+    height:1px;
+    background:var(--hairline-soft);
+    align-self:center;
+  }
+
+  .sec-title{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:20px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+
+  /* ---------- header bar ---------- */
+
+  header.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:22px 0 20px;
+    border-bottom:1px solid var(--hairline);
+    margin-bottom:44px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:var(--ink);
+  }
+
+  .brand svg{display:block;flex:none;}
+
+  .brand .wordmark{
+    font-family:'Inter',sans-serif;
+    font-weight:800;
+    font-size:15px;
+    letter-spacing:-.02em;
+  }
+
+  .topbar-meta{
+    text-align:right;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+
+  .topbar-meta .date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--ink-2);
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- title block ---------- */
+
+  .title-block{margin-bottom:52px;}
+
+  .title-block .eyebrow{display:block;margin-bottom:14px;}
+
+  h1.biz-name{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    font-size:clamp(34px,8vw,52px);
+    line-height:1.06;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin-bottom:16px;
+    overflow-wrap:break-word;
+    text-wrap:balance;
+  }
+
+  .title-sub{
+    font-size:17px;
+    line-height:1.55;
+    color:var(--ink-2);
+    max-width:52ch;
+  }
+
+  .title-block::after{
+    content:"";
+    display:block;
+    width:56px;
+    height:2px;
+    background:var(--amber);
+    margin-top:26px;
+  }
+
+  /* ---------- jump nav ---------- */
+
+  .toc{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:-16px 0 48px;
+  }
+
+  .toc a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.04em;
+    color:var(--ink-2);
+    text-decoration:none;
+    padding:7px 13px;
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    background:var(--card);
+    white-space:nowrap;
+    transition:border-color .15s ease,color .15s ease;
+  }
+
+  .toc a:hover{border-color:var(--amber);color:var(--ink);}
+
+  /* ---------- cards ---------- */
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--hairline-soft);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+
+  @media (min-width:560px){
+    .card{padding:34px 38px;}
+  }
+
+  section{margin-bottom:44px;}
+
+  /* ---------- headline finding ---------- */
+
+  .headline-card .eyebrow{display:block;margin-bottom:14px;}
+
+  .headline-text{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:clamp(20px,4.4vw,25px);
+    line-height:1.4;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    text-wrap:balance;
+  }
+
+  /* ---------- big number ---------- */
+
+  .big-num{
+    font-family:'Inter Tight','Inter',sans-serif;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(64px,17vw,104px);
+    line-height:1;
+    letter-spacing:-.03em;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+
+  .big-num-label{
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink-2);
+    margin-bottom:18px;
+    max-width:40ch;
+  }
+
+  .num-divider{
+    height:1px;
+    background:var(--hairline-soft);
+    margin:0 0 18px;
+  }
+
+  .num-reasoning{
+    font-size:15px;
+    line-height:1.65;
+    color:var(--ink-2);
+    max-width:58ch;
+  }
+
+  .recovery-note{
+    margin-top:16px;
+    font-size:14px;
+    font-weight:600;
+    line-height:1.6;
+    color:var(--green);
+    max-width:52ch;
+  }
+
+  /* ---------- your-math calculator ---------- */
+
+  .math-card .eyebrow{display:block;margin-bottom:6px;}
+
+  .math-card .math-lede{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-2);
+    margin-bottom:22px;
+  }
+
+  .math-card .math-lede strong{color:var(--ink);font-weight:700;}
+
+  .calc-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:8px;
+  }
+
+  @media (max-width:480px){
+    .calc-grid{grid-template-columns:1fr;}
+  }
+
+  .calc-field{display:flex;flex-direction:column;gap:8px;}
+
+  .calc-field-label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink-2);
+  }
+
+  .calc-input-wrap{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    border:1.5px solid var(--hairline);
+    border-radius:8px;
+    background:var(--paper);
+    padding:0 14px;
+    transition:border-color .15s ease;
+  }
+
+  .calc-input-wrap:focus-within{border-color:var(--amber);}
+
+  .calc-affix{
+    font-family:'Inter Tight','Inter',sans-serif;
+    font-weight:600;
+    color:var(--muted);
+    font-size:15px;
+  }
+
+  .calc-input-wrap input{
+    appearance:textfield;
+    -moz-appearance:textfield;
+    border:none;
+    background:none;
+    outline:none;
+    width:100%;
+    min-width:0;
+    padding:12px 8px;
+    font-family:'Inter Tight','Inter',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .calc-input-wrap input::-webkit-outer-spin-button,
+  .calc-input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+
+  .calc-result{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:22px;
+    padding-top:22px;
+    border-top:1px solid var(--hairline-soft);
+  }
+
+  @media (max-width:480px){
+    .calc-result{grid-template-columns:1fr;gap:20px;}
+  }
+
+  .calc-result-label{
+    display:block;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+
+  .calc-result-num{
+    font-family:'Inter Tight','Inter',sans-serif;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(27px,6vw,36px);
+    letter-spacing:-.02em;
+    color:var(--ink);
+  }
+
+  .calc-result-num--annual{color:var(--green);}
+
+  .math-disclaimer{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid var(--hairline-soft);
+    font-size:14px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  /* ---------- findings ---------- */
+
+  .findings-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .finding{
+    background:var(--card);
+    border:1px solid var(--hairline-soft);
+    border-radius:var(--radius);
+    padding:24px 26px;
+  }
+
+  @media (min-width:560px){
+    .finding{padding:26px 32px;}
+  }
+
+  .finding-title{
+    font-size:16.5px;
+    font-weight:700;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+
+  .finding-detail{
+    font-size:15px;
+    line-height:1.65;
+    color:var(--ink-2);
+  }
+
+  .finding-detail .positive{color:var(--green);font-weight:600;}
+
+  /* ---------- competitive context ---------- */
+
+  .competitor-card{
+    border-left:3px solid var(--amber);
+  }
+
+  .competitor-card .eyebrow{display:block;margin-bottom:12px;}
+
+  .competitor-text{
+    font-size:15.5px;
+    line-height:1.7;
+    color:var(--ink-2);
+  }
+
+  /* ---------- three fixes ---------- */
+
+  .fixes{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .fix{
+    display:flex;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid var(--hairline-soft);
+  }
+
+  .fix:first-child{padding-top:4px;}
+  .fix:last-child{border-bottom:none;padding-bottom:4px;}
+
+  .fix-num{
+    font-family:'Inter Tight','Inter',sans-serif;
+    font-weight:700;
+    font-size:26px;
+    line-height:1.15;
+    letter-spacing:-.02em;
+    color:var(--amber);
+    font-variant-numeric:tabular-nums;
+    flex:none;
+    width:34px;
+  }
+
+  .fix-body{
+    font-size:15.5px;
+    line-height:1.65;
+    color:var(--ink);
+    padding-top:3px;
+  }
+
+  /* ---------- close / CTA ---------- */
+
+  .close-card .eyebrow{display:block;margin-bottom:14px;}
+
+  .close-callout{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:19px;
+    line-height:1.5;
+    color:var(--ink);
+    margin-bottom:18px;
+    text-wrap:balance;
+  }
+
+  .close-callout strong{color:#B87F00;}
+
+  .close-text{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink-2);
+    max-width:56ch;
+    margin-bottom:28px;
+  }
+
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .cta-btn{
+    display:block;
+    text-align:center;
+    background:var(--amber);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    letter-spacing:-.01em;
+    text-decoration:none;
+    padding:15px 28px;
+    border-radius:8px;
+    transition:filter .15s ease,border-color .15s ease;
+  }
+
+  @media (min-width:560px){
+    .cta-btn{display:inline-block;}
+  }
+
+  .cta-btn:hover{filter:brightness(1.05);}
+
+  .cta-btn--ghost{
+    background:none;
+    border:1.5px solid var(--hairline);
+    color:var(--ink);
+  }
+
+  .cta-btn--ghost:hover{filter:none;border-color:var(--ink);}
+
+  .cta-quiet{
+    margin-top:16px;
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer.foot{
+    margin-top:56px;
+    padding-top:24px;
+    border-top:1px solid var(--hairline);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px 18px;
+    color:var(--muted);
+  }
+
+  footer.foot svg{display:block;flex:none;color:var(--muted);}
+
+  footer.foot .foot-item{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+
+  footer.foot .foot-sep{
+    width:3px;height:3px;border-radius:50%;
+    background:var(--hairline);
+  }
+
+  /* ---------- print ---------- */
+
+  @media print{
+    body{background:#fff;}
+    .page{max-width:100%;padding:0;}
+    .card,.finding{
+      border:1px solid #ddd;
+      box-shadow:none;
+      break-inside:avoid;
+    }
+    .toc{display:none;}
+    .calc-input-wrap{border:1px solid #ccc;background:none;}
+    .cta-btn{
+      display:inline-block;
+      background:none;
+      border:1px solid var(--ink);
+      color:var(--ink);
+      padding:10px 18px;
+    }
+    .cta-btn--primary::after{
+      content:" — station.solutions/call";
+      font-weight:400;
+    }
+    .cta-btn--ghost{display:none;}
+    header.topbar,footer.foot{border-color:#ddd;}
+    section{break-inside:avoid;}
+  }
+
+  @media (max-width:420px){
+    header.topbar{flex-direction:column;align-items:flex-start;gap:12px;}
+    .topbar-meta{text-align:left;}
+    .fix{gap:14px;}
+  }
+</style>
+<style>
+  @media print{section{break-inside:auto;}.sec-head{break-after:avoid;}.card,.finding{break-inside:avoid;}
+    .toc{display:flex!important;flex-direction:column;gap:5px;margin:34px 0 0;}
+    .toc::before{content:"Contents";font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8e929c;margin-bottom:8px;}
+    .toc a{border:none;background:none;padding:3px 0;font-size:12.5px;color:#4a4e57;}
+    .headline-card{break-before:page;}
+    #sec-seo .card,#sec-geo .card,#sec-appendix .card{break-inside:auto;}
+    .card>.eyebrow{break-after:avoid;}.lede{break-inside:avoid;}
+    .findings-list{display:block;}.finding{margin-bottom:14px;}
+    .kv,.safety-grid{display:block;}.kv>div,.safety-grid>div{break-inside:avoid;margin-top:14px;}.kv>span,.safety-grid>span{margin-top:6px;display:inline-block;}
+    .mini-fixes{break-inside:avoid;}.tbl tr{break-inside:avoid;}
+    .foot{break-before:avoid;margin-top:10px!important;padding-top:10px!important;}.appendix dl{margin-top:10px;}}
+  .score-card{display:flex;gap:28px;align-items:center;flex-wrap:wrap;}
+  .ring{flex:none;}
+  .ring-num{font-family:'Inter Tight','Inter',sans-serif;font-weight:700;font-size:38px;fill:#16181d;letter-spacing:-.03em;}
+  .ring-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;fill:#8e929c;text-transform:uppercase;}
+  .bars{flex:1;min-width:240px;display:flex;flex-direction:column;gap:11px;}
+  .bar-row{display:grid;grid-template-columns:1fr 3fr 34px;gap:12px;align-items:center;font-size:13px;}
+  .bar-name{font-weight:600;color:var(--ink-2);white-space:nowrap;}
+  .bar-name em{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-left:4px;}
+  .bar-track{height:8px;border-radius:999px;background:rgba(22,24,29,.07);overflow:hidden;}
+  .bar-fill{display:block;height:100%;background:var(--amber);border-radius:999px;}
+  .bar-val{font-family:'Inter Tight','Inter',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink);}
+  .score-note{width:100%;font-size:13.5px;line-height:1.6;color:var(--muted);margin-top:6px;}
+  @media (max-width:480px){.bar-row{grid-template-columns:1fr 2fr 30px;}.bar-name{white-space:normal;}}
+  table.tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px;}
+  table.tbl th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:0 8px 10px 0;border-bottom:1px solid var(--hairline);}
+  table.tbl td{padding:10px 8px 10px 0;border-bottom:1px solid var(--hairline-soft);color:var(--ink-2);vertical-align:top;font-variant-numeric:tabular-nums;}
+  table.tbl td.num{text-align:right;font-weight:600;color:var(--ink);}
+  table.tbl th.num{text-align:right;}
+  table.tbl tr.you td{color:var(--ink);font-weight:700;background:rgba(255,176,0,.08);}
+  .verdict{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--hairline);white-space:nowrap;}
+  .verdict--ok{color:#1f8a52;border-color:rgba(47,191,113,.4);background:rgba(47,191,113,.08);}
+  .safety-grid{display:grid;grid-template-columns:1fr auto;gap:14px 18px;align-items:center;font-size:14.5px;color:var(--ink-2);}
+  .safety-grid strong{color:var(--ink);font-weight:600;display:block;}
+  .safety-grid small{display:block;font-size:13px;color:var(--muted);line-height:1.5;}
+  @media (max-width:480px){.safety-grid{grid-template-columns:1fr;gap:6px;}.safety-grid .verdict{margin-bottom:10px;justify-self:start;}}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:14px 18px;align-items:center;font-size:14.5px;color:var(--ink-2);}
+  .kv strong{color:var(--ink);font-weight:600;display:block;}
+  .kv small{display:block;font-size:13px;color:var(--muted);line-height:1.5;}
+  .verdict--warn{color:#B87F00;border-color:rgba(255,176,0,.55);background:rgba(255,176,0,.10);}
+  .verdict--bad{color:#b3261e;border-color:rgba(179,38,30,.35);background:rgba(179,38,30,.07);}
+  .verdict--na{color:var(--muted);}
+  @media (max-width:480px){.kv{grid-template-columns:1fr;gap:6px;}.kv .verdict{margin-bottom:10px;justify-self:start;}}
+  .lede{font-size:15.5px;line-height:1.7;color:var(--ink-2);margin-bottom:22px;}
+  .lede strong{color:var(--ink);}
+  .mini-fixes{margin-top:22px;padding-top:18px;border-top:1px solid var(--hairline-soft);}
+  .mini-fixes .eyebrow{display:block;margin-bottom:10px;}
+  .mini-fixes ol{padding-left:20px;font-size:14.5px;line-height:1.65;color:var(--ink-2);}
+  .mini-fixes li{margin-bottom:8px;}
+  .mini-fixes li strong{color:var(--ink);}
+  .appendix{font-size:13.5px;line-height:1.6;color:var(--ink-2);}
+  .appendix dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin-top:14px;}
+  .appendix dt{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted);white-space:nowrap;padding-top:2px;}
+  .appendix dd{margin:0;}
+  .omission{margin-top:16px;padding:14px 16px;border-left:3px solid var(--amber);background:rgba(255,176,0,.06);font-size:14px;line-height:1.6;color:var(--ink-2);}
+  @media (max-width:480px){.appendix dl{grid-template-columns:1fr;gap:2px 0;}.appendix dd{margin-bottom:10px;}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <div class="brand"><svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><defs><g id="stArm"><rect x="29.5" y="3" width="18" height="36" rx="8.5"/><rect x="52.5" y="3" width="18" height="36" rx="8.5"/></g><mask id="stCore"><rect width="100" height="100" fill="#fff"/><circle cx="50" cy="50" r="16.5" fill="#000"/></mask></defs><g mask="url(#stCore)" fill="currentColor" transform="rotate(45 50 50)"><use href="#stArm"/><use href="#stArm" transform="rotate(90 50 50)"/><use href="#stArm" transform="rotate(180 50 50)"/><use href="#stArm" transform="rotate(270 50 50)"/></g></svg><span class="wordmark">STATION</span></div>
+    <div class="topbar-meta"><span class="eyebrow">Business Scan · Confidential</span><span class="date">29 Sep 2026</span></div>
+  </header>
+
+  <div class="title-block">
+    <span class="eyebrow">Prepared For</span>
+    <h1 class="biz-name">Eagle One Pizza</h1>
+    <p class="title-sub">Seven family-owned stores: SW Oklahoma City &amp; Moore, Midwest City, Harrah, Norman, North Classen, Lexington and Holdenville. What we found, and the three fastest fixes.</p>
+  </div>
+
+  <nav class="toc" aria-label="Jump to a section">
+    <a href="#sec-score">00 &middot; Score</a>
+    <a href="#sec-findings">01 &middot; What we found</a>
+    <a href="#sec-safety">02 &middot; Site safety</a>
+    <a href="#sec-seo">03 &middot; Search engines</a>
+    <a href="#sec-geo">04 &middot; AI search</a>
+    <a href="#sec-competitor">05 &middot; Around you</a>
+    <a href="#sec-fixes">06 &middot; Three fixes</a>
+    <a href="#sec-close">07 &middot; Next step</a>
+    <a href="#sec-appendix">A &middot; Evidence</a>
+  </nav>
+
+  <section>
+    <div class="card headline-card">
+      <span class="eyebrow eyebrow--amber">The Headline</span>
+      <p class="headline-text">Seven stores, 6,027 Google reviews and the first map result for pizza in six towns. The website is still the 2012 design, its menu is a picture, and the ordering system behind every &ldquo;Order Online&rdquo; button shuts down on 30 April 2027.</p>
+    </div>
+  </section>
+
+  <section id="sec-score">
+    <div class="sec-head"><span class="sec-num">00</span><span class="sec-title">Search &amp; discovery score</span><span class="rule"></span></div>
+    <div class="card score-card">
+      <svg class="ring" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Score 65 of 100"><circle cx="64" cy="64" r="54" fill="none" stroke="rgba(22,24,29,.08)" stroke-width="10"/><circle cx="64" cy="64" r="54" fill="none" stroke="#FFB000" stroke-width="10" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="118.8" transform="rotate(-90 64 64)"/><text x="64" y="60" text-anchor="middle" class="ring-num">65</text><text x="64" y="80" text-anchor="middle" class="ring-lbl">of 100</text></svg>
+      <div class="bars"><div class="bar-row"><span class="bar-name">Google Business Profile <em>25%</em></span><span class="bar-track"><span class="bar-fill" style="width:68%"></span></span><span class="bar-val">68</span></div><div class="bar-row"><span class="bar-name">Reputation <em>25%</em></span><span class="bar-track"><span class="bar-fill" style="width:97%"></span></span><span class="bar-val">97</span></div><div class="bar-row"><span class="bar-name">Website <em>20%</em></span><span class="bar-track"><span class="bar-fill" style="width:61%"></span></span><span class="bar-val">61</span></div><div class="bar-row"><span class="bar-name">Local search <em>20%</em></span><span class="bar-track"><span class="bar-fill" style="width:46%"></span></span><span class="bar-val">46</span></div><div class="bar-row"><span class="bar-name">Tools & tracking <em>10%</em></span><span class="bar-track"><span class="bar-fill" style="width:25%"></span></span><span class="bar-val">25</span></div></div>
+      <p class="score-note">Computed by rule from the checks in the appendix, weighted as shown. It measures how easily a hungry person can find you, trust you and get an order in. It says nothing about the pizza. Reputation is close to the maximum: the score is held down by the website, the tracking and the local-search basics the website should be carrying.</p>
+    </div>
+  </section>
+
+  <section id="sec-findings">
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">What we found</span><span class="rule"></span></div>
+    <div class="findings-list"><div class="finding"><p class="finding-title">Your online ordering switches off on 30 April 2027.</p><p class="finding-detail">Every one of the 14 &ldquo;Order Online&rdquo; buttons on the site opens GloriaFood, the free ordering system from Oracle. GloriaFood&rsquo;s own homepage now says the service &ldquo;will reach end of life on April 30, 2027&rdquo;, and that Oracle does not offer a direct replacement. That is seven months from today. When it goes, the buttons at all seven stores stop taking orders, and the menu, customer list and order history inside it go too unless they are exported first. <span class="positive">It works today, and your reviewers name the online pickup discount as a reason they order. That is exactly why the move needs planning rather than a scramble in April.</span></p></div><div class="finding"><p class="finding-title">The menu and every price live inside two picture flyers, and they disagree.</p><p class="finding-detail">The Our Menu page lists toppings and specialty pizzas with no prices. The prices are in two flyer images (JPEGs) further down, which Google, AI assistants and screen readers cannot read. The page says &ldquo;All Prices Reflect Carry Out Only&rdquo; above a list with no prices, then &ldquo;Please Call&rdquo; with no number after it. A large one-topping pizza is <strong>$6.99</strong> in one flyer, <strong>$10.99</strong> in the other, and <strong>$8.99</strong> in the SW OKC ordering menu. The ordering page advertises a &ldquo;10% off pick-up special&rdquo; directly above a &ldquo;35% off pizza&rdquo; pick-up special. The page text lists a stuffed crust; the flyer lists cauliflower.</p></div><div class="finding"><p class="finding-title">On a phone it is a shrunken 2012 desktop page.</p><p class="finding-detail">None of the 8 pages carries a mobile viewport tag, so a phone lays each one out 990 pixels wide and shrinks it: body text lands at about 5 pixels tall. Lighthouse mobile scores speed at 57 (largest paint 5.4 s) and best practices at 31. The homepage&rsquo;s &ldquo;Call us&rdquo; link opens the ordering page instead of the phone. The only tap-to-call links are on the Directions page, and three of those seven have an invisible character typed in front of the number.</p></div><div class="finding"><p class="finding-title">The newest photo on the site was taken in June 2012.</p><p class="finding-detail">The Gallery holds 11 photos, each 333 pixels wide. Ten are pizzas in your boxes, with the camera&rsquo;s date stamp still printed in the corner: 06/15/2012 and 06/20/2012. There is no photo of any of the seven stores, the staff, the gyros or the cheese sticks your reviewers keep praising. The Announcements page still announces the Lexington grand opening, under a graphic that says Holdenville.</p></div><div class="finding"><p class="finding-title">6,027 Google reviews, and the website never mentions one.</p><p class="finding-detail">Your seven Google listings hold 6,027 reviews, rated 4.3 to 4.6, and for &ldquo;pizza&rdquo; in their own town six of the seven are Google&rsquo;s first map result. <span class="positive">That is the strongest local reputation in this scan by a distance.</span> But all seven listings send people to the same homepage rather than to their store, six of them through the old http address. Lexington is filed as &ldquo;Restaurant&rdquo;, not &ldquo;Pizza restaurant&rdquo;. The Norman listing carries a review about a nail salon. And the 2023 Readers&rsquo; Choice award from The Oklahoman appears only inside a flyer image. The complaints that do appear in 2026 are about the handoff: missing items, cold delivery, and one online order charged and then cancelled.</p></div><div class="finding"><p class="finding-title">Nothing measures anything, and has not since 2023.</p><p class="finding-detail">The only analytics tag on the site is Universal Analytics (UA-7870337-1). Google stopped processing standard Universal Analytics on 1 July 2023, so no visit to the site has been counted for over three years. There is no ad pixel and no email or text list, so the thousands of people who order online every month cannot be invited back. The homepage also still loads a review badge from Urbanspoon, a service that closed; the browser blocks it as insecure.</p></div></div>
+  </section>
+
+  <section id="sec-safety">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Site safety</span><span class="rule"></span></div>
+    <div class="card">
+      <span class="eyebrow" style="display:block;margin-bottom:16px">Malware &amp; injected-content check</span>
+      <div class="safety-grid">
+        <div><strong>Station injected-link sweep</strong><small>Every page in the sitemap fetched twice, once as a browser and once as Googlebot, compared for hidden, off-screen or crawler-only links.</small></div><span class="verdict verdict--ok">Nothing found</span>
+        <div><strong>Sucuri SiteCheck</strong><small>Independent malware and blacklist scanner. No malware, no blacklist entries. Security 6 of 6; TLS 5 of 6.</small></div><span class="verdict verdict--ok">No malware · not blacklisted</span>
+        <div><strong>Secure connection</strong><small>Valid certificate (Google Trust Services, renewed 6 Sep 2026). Every http and bare-domain address forwards to https://www.</small></div><span class="verdict verdict--ok">Correct</span>
+        <div><strong>Insecure content</strong><small>The homepage requests a script over plain http from urbanspoon.com. The browser blocks it, and Lighthouse marks the page &ldquo;does not use HTTPS&rdquo; because of it.</small></div><span class="verdict verdict--warn">One blocked script</span>
+        <div><strong>Google Safe Browsing</strong><small>Not queried for this scan, so not claimed either way.</small></div><span class="verdict verdict--na">Not verified</span>
+      </div>
+      <p class="omission">Nothing injected was found. The site runs on Weebly, a hosted builder, so there is no plugin or server to keep patched, which is the good side of an old hosted site. &ldquo;Nothing found&rdquo; means these checks found nothing, not that the site can never be compromised.</p>
+    </div>
+  </section>
+
+  <section id="sec-seo">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Search engines</span><span class="rule"></span></div>
+    <div class="card">
+      <span class="eyebrow" style="display:block;margin-bottom:14px">Technical &amp; on-page SEO</span>
+      <p class="lede">Google can reach every page, and the Google listings are doing the heavy lifting. <strong>The website adds almost nothing to them.</strong> There is one Directions page for seven towns, no page per store, and the menu Google would need to answer &ldquo;gyros&rdquo;, &ldquo;cauliflower crust&rdquo; or &ldquo;calzone&rdquo; is a picture.</p>
+      <div class="kv">
+        <div><strong>Indexability</strong><small>robots.txt open; sitemap lists all 8 pages.</small></div><span class="verdict verdict--ok">Open</span>
+        <div><strong>Mobile layout</strong><small>No viewport tag on any page. Google indexes the mobile rendering first.</small></div><span class="verdict verdict--bad">None</span>
+        <div><strong>Titles</strong><small>&ldquo;Eagle One Pizza Has Landed! - Home&rdquo;, &ldquo;Our Menu - Eagle One Pizza Has Landed!&rdquo; and so on. No town is named in any title.</small></div><span class="verdict verdict--bad">No towns</span>
+        <div><strong>Meta description</strong><small>Homepage only: &ldquo;South OKC Pizza and More&rdquo;. The other seven have none, and the six stores outside south OKC are not in it.</small></div><span class="verdict verdict--bad">1 of 8</span>
+        <div><strong>H1 heading</strong><small>None on any page. The name is set as a styled title in the header.</small></div><span class="verdict verdict--bad">Missing</span>
+        <div><strong>Restaurant schema</strong><small>No structured data: no Restaurant, Menu, address, hours or ordering link a search engine can read directly.</small></div><span class="verdict verdict--bad">Missing</span>
+        <div><strong>Menu as text</strong><small>Names and toppings are text; every price, the calzones, gyros, wings, sides and salads exist only in two flyer images.</small></div><span class="verdict verdict--bad">Mostly images</span>
+        <div><strong>Page weight &amp; speed</strong><small>731 KB; first paint 4.3 s, largest paint 5.4 s on a mobile connection, much of it Weebly&rsquo;s old jQuery and the Facebook widget.</small></div><span class="verdict verdict--warn">Slow</span>
+      </div>
+      <p class="lede" style="margin:24px 0 8px"><strong>Which page answers which search.</strong> For six things people type, the closest page today and what stops it.</p>
+      <table class="tbl"><thead><tr><th>Search phrase</th><th>Closest page today</th><th>Gap</th></tr></thead><tbody>
+        <tr><td>pizza delivery Norman</td><td>Directions (all seven stores)</td><td>No Norman page, no delivery area, &ldquo;Norman&rdquo; in no title</td></tr>
+        <tr><td>gyros Oklahoma City</td><td>Our Menu</td><td>Gyros appear only as a topping in text; the sandwiches and platters are in an image. Not in Google&rsquo;s 20 results</td></tr>
+        <tr><td>cauliflower crust pizza OKC</td><td>Our Menu</td><td>Only in the flyer image; the text lists a stuffed crust instead</td></tr>
+        <tr><td>pizza specials Midwest City</td><td>Specials and Coupons</td><td>The page is two coupon images and a document viewer that does not load</td></tr>
+        <tr><td>pizza Harrah drive thru</td><td>None</td><td>Google knows Harrah has a drive-thru window; the site never says so</td></tr>
+        <tr><td>large pizza price near me</td><td>None</td><td>No price anywhere in text</td></tr>
+      </tbody></table>
+      <div class="mini-fixes"><span class="eyebrow">Ranked fixes</span><ol>
+        <li><strong>One page per store</strong>: address, hours, phone, delivery area, a photo of the front, and its own title (&ldquo;Eagle One Pizza Norman · Lindsey St&rdquo;). Point each Google listing at its page.</li>
+        <li><strong>Put the menu in text</strong>, with prices, allergens and the gluten-free and cauliflower crusts, so one menu feeds the site, the ordering system and Google.</li>
+        <li><strong>Serve a phone layout</strong> and remove the Urbanspoon script.</li>
+        <li><strong>Add Restaurant markup</strong> to each store page: address, hours, menu link, ordering link.</li>
+        <li><strong>Give every page a real title and description</strong> naming the town.</li>
+      </ol></div>
+    </div>
+  </section>
+
+  <section id="sec-geo">
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">AI search</span><span class="rule"></span></div>
+    <div class="card">
+      <span class="eyebrow" style="display:block;margin-bottom:14px">Generative engine optimisation</span>
+      <p class="lede">More people now ask ChatGPT or Google&rsquo;s AI answer &ldquo;cheap large pizza near me&rdquo; or &ldquo;who has gluten-free pizza in Norman&rdquo;. The answer is built from text a model can read. <strong>Your reviews say you&rsquo;re the value pick; your website can&rsquo;t tell a model what anything costs.</strong></p>
+      <div class="kv">
+        <div><strong>AI crawler access</strong><small>robots.txt blocks one SEO crawler (NerdyBot) and nothing else. GPTBot, ClaudeBot, PerplexityBot and Google-Extended inherit the general allow.</small></div><span class="verdict verdict--ok">Open</span>
+        <div><strong>Entity clarity</strong><small>Names, addresses and phones on the site match all seven Google listings.</small></div><span class="verdict verdict--ok">Consistent</span>
+        <div><strong>Quotable facts</strong><small>No price, no delivery area, no &ldquo;family owned since&rdquo;, no award, no count of stores in text a model can lift.</small></div><span class="verdict verdict--bad">Thin</span>
+        <div><strong>Structured facts</strong><small>No schema of any kind.</small></div><span class="verdict verdict--bad">Missing</span>
+        <div><strong>llms.txt</strong><small>Not present. Optional.</small></div><span class="verdict verdict--na">None</span>
+        <div><strong>Social profiles</strong><small>The Directions page links seven separate Facebook pages, one per store. Follower counts were not checked.</small></div><span class="verdict verdict--na">Not verified</span>
+      </div>
+      <div class="mini-fixes"><span class="eyebrow">Ranked fixes</span><ol>
+        <li><strong>A text menu with prices</strong> on the site. It is the single most-asked question about any pizzeria.</li>
+        <li><strong>A short &ldquo;about&rdquo; paragraph</strong>: family-owned, seven stores, the towns, Readers&rsquo; Choice 2023, dine-in, carry-out and delivery.</li>
+        <li><strong>Restaurant and Menu markup</strong> on every store page.</li>
+      </ol></div>
+    </div>
+  </section>
+
+  <section id="sec-competitor">
+    <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Around you</span><span class="rule"></span></div>
+    <div class="card competitor-card">
+      <span class="eyebrow">Competitive Context</span>
+      <p class="competitor-text">For &ldquo;pizza&rdquo; in each store&rsquo;s own town, Google&rsquo;s local index puts Eagle One first in six of seven. The one exception is Moore, where Bella&rsquo;s Pizzeria, Jet&rsquo;s and Hideaway rank ahead of the S Western store. The pizzerias in those searches hold a median of 439 reviews; your stores average 861.</p>
+      <table class="tbl"><thead><tr><th>Your store</th><th class="num">Rating &middot; reviews</th><th class="num">Map rank</th><th>Most-reviewed rival in that search</th></tr></thead><tbody><tr class="you"><td>SW OKC &amp; Moore<br><small style="font-weight:400;color:var(--muted)">11613 S Western Ave</small></td><td class="num">4.6 &middot; 2,196</td><td class="num">#4 of 20</td><td>Hideaway Pizza &middot; 4.5 &middot; 2,585</td></tr><tr class="you"><td>Midwest City<br><small style="font-weight:400;color:var(--muted)">1920 S Air Depot Blvd</small></td><td class="num">4.5 &middot; 1,505</td><td class="num">#1 of 20</td><td>Cicis Pizza &middot; 4.0 &middot; 2,352</td></tr><tr class="you"><td>Harrah<br><small style="font-weight:400;color:var(--muted)">20213 NE 23rd St</small></td><td class="num">4.5 &middot; 875</td><td class="num">#1 of 5</td><td>Little Caesars &middot; 3.0 &middot; 444</td></tr><tr class="you"><td>Norman<br><small style="font-weight:400;color:var(--muted)">1951 W Lindsey St</small></td><td class="num">4.3 &middot; 591</td><td class="num">#1 of 20</td><td>New York Pizza &amp; Pasta &middot; 4.2 &middot; 690</td></tr><tr class="you"><td>North Classen OKC<br><small style="font-weight:400;color:var(--muted)">3513 N Classen Blvd</small></td><td class="num">4.5 &middot; 427</td><td class="num">#1 of 20</td><td>Empire Slice House, Plaza &middot; 4.7 &middot; 5,180</td></tr><tr class="you"><td>Lexington<br><small style="font-weight:400;color:var(--muted)">128 N Main St</small></td><td class="num">4.6 &middot; 222</td><td class="num">#1 of 1</td><td>No other pizzeria listed</td></tr><tr class="you"><td>Holdenville<br><small style="font-weight:400;color:var(--muted)">101 E Highway St</small></td><td class="num">4.4 &middot; 211</td><td class="num">#1 of 2</td><td>Pizza Hut &middot; 3.8 &middot; 291</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <section id="sec-fixes">
+    <div class="sec-head"><span class="sec-num">06</span><span class="sec-title">Three fixes for this week</span><span class="rule"></span></div>
+    <div class="card"><div class="fixes">
+      <div class="fix"><span class="fix-num">1</span><p class="fix-body"><strong>Export everything out of GloriaFood now.</strong> The menu, the customer list and the order history, for all seven stores, while support is still answering. Then choose the replacement well before spring, so April 2027 is a non-event.</p></div>
+      <div class="fix"><span class="fix-num">2</span><p class="fix-body"><strong>Fix the Google listings in twenty minutes.</strong> Change Lexington&rsquo;s category to Pizza restaurant, switch all seven website links to https, report the nail-salon review on the Norman listing, and add fresh photos of each store. None of it costs anything.</p></div>
+      <div class="fix"><span class="fix-num">3</span><p class="fix-body"><strong>Turn counting back on.</strong> A free Google Analytics 4 tag takes ten minutes and replaces the one that stopped in 2023. Without it you can&rsquo;t know how many orders start on the website.</p></div>
+    </div></div>
+  </section>
+
+  <section id="sec-close">
+    <div class="sec-head"><span class="sec-num">07</span><span class="sec-title">Where Station comes in</span><span class="rule"></span></div>
+    <div class="card close-card">
+      <span class="eyebrow eyebrow--amber">Next Step</span>
+      <p class="close-text">You have already done the hard part: seven stores people love enough to review six thousand times. The website is the one piece still wearing its 2012 design, and the ordering deadline means it has to change this year either way. Station builds a phone-first site with a page for every store and a menu in text, moves your online ordering before the switch-off, and then keeps it all running.</p>
+      <div class="cta-row">
+        <a class="cta-btn cta-btn--primary" href="https://station.solutions/custom/">Talk to Station</a>
+      </div>
+      <p class="cta-quiet">Questions? Reply to this email.</p>
+    </div>
+  </section>
+
+  <section id="sec-appendix">
+    <div class="sec-head"><span class="sec-num">A</span><span class="sec-title">Evidence</span><span class="rule"></span></div>
+    <div class="card appendix">
+      <p>Every claim above rests on one of these probes, all run on 29 Sep 2026.</p>
+      <dl>
+        <dt>Google Places</dt><dd>Seven listings, all operational, all linking eagleonepizza.com (six over http). SW OKC 4.6 / 2,196 · Midwest City 4.5 / 1,505 (closed Sunday) · Harrah 4.5 / 875 · Norman 4.3 / 591 · North Classen 4.5 / 427 · Lexington 4.6 / 222 (type &ldquo;Restaurant&rdquo;) · Holdenville 4.4 / 211. Total 6,027, review-weighted rating 4.52. Hours on Google match the site. Newest of the 35 reviews the API returned: 2026-09-08. Norman review of 20 Nov 2025 describes a nail salon.</dd>
+        <dt>Local searches</dt><dd>10 Places text searches biased to each store: &ldquo;pizza Moore OK&rdquo; #4 of 20; &ldquo;pizza Midwest City OK&rdquo; #1 of 20; &ldquo;pizza Harrah OK&rdquo; #1 of 5; &ldquo;pizza delivery Norman OK&rdquo; #1 of 20; &ldquo;pizza delivery north Oklahoma City&rdquo; #1 of 20; &ldquo;pizza Lexington OK&rdquo; #1 of 1; &ldquo;pizza Holdenville OK&rdquo; #1 of 2; &ldquo;gluten free pizza Norman&rdquo; #3 of 20; &ldquo;gyros Oklahoma City&rdquo; and &ldquo;halal pizza Oklahoma City&rdquo; not listed. Median reviews of the 41 other pizzerias in the top ten of the town searches: 439.</dd>
+        <dt>Site crawl</dt><dd>All 8 sitemap pages fetched. Weebly (reseller build, &ldquo;Website by Casey Wiley Designs&rdquo;), header image uploaded October 2012. No viewport, no H1, no schema on any page; meta description on the homepage only; 216 words on the homepage. Our Menu: text list with no prices plus two flyer JPEGs (921 px). Specials: two coupon images and a Weebly document viewer that shows &ldquo;Your browser does not support viewing this document&rdquo;. Gallery: 11 JPEGs at 333 px, ten carrying a 2012 camera date stamp. Contact: Weebly form (name, email, comment). 7 tel: links, all on Directions; three contain a zero-width space (U+200B) before the number.</dd>
+        <dt>Online ordering</dt><dd>14 buttons with GloriaFood attributes (data-glf-cuid / data-glf-ruid, script fbgcdn.com/embedder/js/ewm2.js), one restaurant ID per store, opening www.foodbooking.com/ordering. SW OKC ordering menu read in full: large one-topping 8.99, two-topping 9.99, unlimited 10.99, specialty 10.99, cauliflower 13.99, calzones 9.99, gyro sandwich 6.99. The ordering screen&rsquo;s footer reads &ldquo;Supported by NeroFood&rdquo;, a reseller name; the button attributes, the embed script and foodbooking.com (which loads GloriaFood&rsquo;s own code) are GloriaFood&rsquo;s. Banners &ldquo;10% OFF PICK-UP SPECIAL&rdquo; and &ldquo;Get 35% off pizza&rdquo; on the same screen. gloriafood.com homepage, read 29 Sep 2026: &ldquo;GloriaFood will reach end of life on April 30, 2027&rdquo;.</dd>
+        <dt>Mobile render</dt><dd>Headless Chromium at 390 px with a phone profile: every page lays out 990 px wide; computed body text 12 px before scaling. Screenshots on file.</dd>
+        <dt>Lighthouse</dt><dd>Mobile, local headless Chrome, homepage: performance 57, accessibility 76, best practices 31, SEO 83. FCP 4.3 s, LCP 5.4 s, TBT 210 ms, CLS 0.128, 731 KiB. Failing: no HTTPS (the blocked Urbanspoon script), deprecated APIs, third-party cookies, console errors (four 404s and the mixed-content block), low-resolution images, contrast, missing alt text.</dd>
+        <dt>Headers &amp; domain</dt><dd>Served by Weebly behind Cloudflare. Verisign registry: eagleonepizza.com registered 12 Feb 2012, expires 12 Feb 2027, registrar Tucows.</dd>
+        <dt>Safety</dt><dd>Station Parasite Sweep: 9 pages, browser and Googlebot views, 0 spam links, 0 hidden, 0 crawler-only (20.5 s). Sucuri API: no malware, no blacklist; overall C (TLS 5 of 6).</dd>
+        <dt>Analytics</dt><dd>Only tag found: UA-7870337-1 (Universal Analytics, processing ended 1 July 2023). Facebook SDK for the Like button. No GA4, no tag manager, no ad pixel, no email or text sign-up.</dd>
+      </dl>
+      <p class="omission"><strong>Three things we did not do.</strong> We did not call, order or submit anything, so response and delivery times are untested. We make no claim about your position in Google&rsquo;s regular search results; the map ranks come from Google&rsquo;s Places index, which is what the map pack draws from. And we did not test the tap-to-call links on a real handset.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <svg viewBox="0 0 100 100" width="16" height="16" aria-hidden="true"><defs><g id="stArmF"><rect x="29.5" y="3" width="18" height="36" rx="8.5"/><rect x="52.5" y="3" width="18" height="36" rx="8.5"/></g><mask id="stCoreF"><rect width="100" height="100" fill="#fff"/><circle cx="50" cy="50" r="16.5" fill="#000"/></mask></defs><g mask="url(#stCoreF)" fill="currentColor" transform="rotate(45 50 50)"><use href="#stArmF"/><use href="#stArmF" transform="rotate(90 50 50)"/><use href="#stArmF" transform="rotate(180 50 50)"/><use href="#stArmF" transform="rotate(270 50 50)"/></g></svg>
+    <span class="foot-item">station.solutions</span><span class="foot-sep"></span>
+    <span class="foot-item">Prepared by Station · Mission control for business</span><span class="foot-sep"></span>
+    <span class="foot-item">29 Sep 2026</span>
+  </footer>
+</div>
+</body></html>
