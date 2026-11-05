@@ -107,7 +107,7 @@ p{margin:0}
 .spec{padding:7px 0;border-bottom:1px solid #F0EADC}
 .spec:last-child{border-bottom:0}
 .spec b{display:block;font-weight:700;font-size:17px;color:var(--blue-ink)}
-.spec span{display:block;font-size:14px;color:var(--ink-3);line-height:1.45}
+.spec span{display:block;font-size:15px;color:var(--ink-2);line-height:1.45}
 .cat figure{margin:12px 0 0}
 .cat figure img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
 .plain{font-size:15px;color:var(--ink-2);line-height:1.6}
@@ -120,10 +120,10 @@ p{margin:0}
 .coupons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .cp{color:#fff;border-radius:4px;padding:22px 22px 18px;display:grid;gap:6px;align-content:start;outline:2px dashed rgba(255,255,255,.55);outline-offset:-8px}
 .cp.r{background:var(--red)}.cp.b{background:var(--blue)}
-.cp .kind{font:700 15px/1.2 var(--sans);align-self:flex-start;padding-bottom:6px;border-bottom:2px dashed currentColor;opacity:.92}
+.cp .kind{font:700 15px/1.2 var(--sans);align-self:flex-start;padding-bottom:6px;border-bottom:2px dashed currentColor}
 .cp .amt{font:400 clamp(40px,4.6vw,56px)/1 var(--slab)}
 .cp .what{font:700 18px/1.3 var(--sans)}
-.cp small{font-size:13.5px;opacity:.9}
+.cp small{font-size:13.5px}
 @media (max-width:760px){.coupons{grid-template-columns:1fr}}
 
 /* stores */
@@ -156,7 +156,7 @@ p{margin:0}
 
 footer{margin-top:clamp(56px,7vw,96px);background:var(--blue-ink);color:#C9D3EA;padding-block:36px 100px;font-size:14.5px}
 footer .wrap{display:grid;gap:18px}
-footer .logo b{color:#fff}
+footer .logo b{color:#fff}footer .logo b span{color:#FF6B75}
 footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.15);padding-top:16px}
 footer a{color:#fff}
 footer .fine{font-size:13px;color:#9FB0D3;max-width:92ch}
@@ -184,7 +184,7 @@ footer .fine{font-size:13px;color:#9FB0D3;max-width:92ch}
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Eagle One Pizza, top of page"><svg aria-hidden="true"><use href="#badge"/></svg><b>Eagle One<br><span>Pizza</span></b></a>
-    <nav aria-label="Sections"><a href="#menu">Menu</a><a href="#deals">Deals</a><a href="#stores">Locations</a><a href="#about">About</a></nav>
+    <nav aria-label="Sections"><a href="#deals">Deals</a><a href="#menu">Menu</a><a href="#stores">Locations</a><a href="#about">About</a></nav>
     <div class="here">
       <a class="call js-call" href="#stores"><span class="js-phone">405-703-4555</span><small class="js-town">SW OKC &amp; Moore</small></a>
       <a class="btn js-order" href="#stores" target="_blank" rel="noopener">Order online</a>
@@ -217,6 +217,18 @@ footer .fine{font-size:13px;color:#9FB0D3;max-width:92ch}
       <figure><img src="img/half-pepperoni-canadian.jpg" width="1024" height="1024" loading="lazy" alt="Half pepperoni, half Canadian bacon pizza in a box"><figcaption>Half pepperoni, half Canadian bacon</figcaption></figure>
       <figure><img src="img/half-and-half.jpg" width="1024" height="1024" loading="lazy" alt="Half beef, pepper and olive, half pepperoni and olive, in a box"><figcaption>Half and half, your way</figcaption></figure>
       <figure><img src="img/pepperoni-box.jpg" width="1024" height="1024" loading="lazy" alt="Large pepperoni pizza in a box"><figcaption>Large pepperoni</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="deals" aria-labelledby="deals-h">
+  <div class="wrap">
+    <h2 id="deals-h">Deals</h2>
+    <p class="sub">These come off automatically when you order online. Ask your store what&rsquo;s running if you&rsquo;re ordering by phone.</p>
+    <div class="coupons">
+      <div class="cp r"><span class="kind">Online pick-up</span><span class="amt">35% off</span><span class="what">every pizza on the order</span><small>Order online and pick it up yourself.</small></div>
+      <div class="cp b"><span class="kind">Delivery</span><span class="amt">Free side</span><span class="what">with any two large pizzas</span><small>Bread sticks, cinnamon sticks or a 2-liter drink.</small></div>
+      <div class="cp r"><span class="kind">First online order</span><span class="amt">10% off</span><span class="what">your whole first order</span><small>For customers new to online ordering.</small></div>
     </div>
   </div>
 </section>
@@ -302,18 +314,6 @@ footer .fine{font-size:13px;color:#9FB0D3;max-width:92ch}
       </div>
     </div>
     <p class="menu-foot">Prices read from the store&rsquo;s online menu on 29 September 2026.</p>
-  </div>
-</section>
-
-<section class="sec" id="deals" aria-labelledby="deals-h">
-  <div class="wrap">
-    <h2 id="deals-h">Deals</h2>
-    <p class="sub">These come off automatically when you order online. Ask your store what&rsquo;s running if you&rsquo;re ordering by phone.</p>
-    <div class="coupons">
-      <div class="cp r"><span class="kind">Online pick-up</span><span class="amt">35% off</span><span class="what">every pizza on the order</span><small>Order online and pick it up yourself.</small></div>
-      <div class="cp b"><span class="kind">Delivery</span><span class="amt">Free side</span><span class="what">with any two large pizzas</span><small>Bread sticks, cinnamon sticks or a 2-liter drink.</small></div>
-      <div class="cp r"><span class="kind">First online order</span><span class="amt">10% off</span><span class="what">your whole first order</span><small>For customers new to online ordering.</small></div>
-    </div>
   </div>
 </section>
 
