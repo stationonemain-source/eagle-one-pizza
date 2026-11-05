@@ -159,7 +159,7 @@ textarea{min-height:70px;resize:vertical}
 </head>
 <body>
 
-<p class="demo">Demo of Eagle One&rsquo;s own ordering. No card is charged and no order reaches a store. Orders appear on the <a href="store.html" target="_blank" rel="noopener">store order board</a>.</p>
+<p class="demo">Demo of Eagle One&rsquo;s own ordering. No card is charged and no order reaches a store. Orders land on Station&rsquo;s demo <a href="https://my.station.solutions/app#orders" target="_blank" rel="noopener">store order board</a> (staff sign-in).</p>
 
 <header class="top">
   <div class="bar">
@@ -257,7 +257,7 @@ textarea{min-height:70px;resize:vertical}
     <div class="panel"><ul class="lines" id="dlines"></ul><div class="sum" id="dsum"></div></div>
     <p class="why">Demo: no store received this order. In the live version it prints at the store, shows on their order board and the customer gets a text when it&rsquo;s ready.</p>
     <div class="links">
-      <a class="ghost red" href="store.html" target="_blank" rel="noopener">See it on the store board</a>
+      <a class="ghost red" href="https://my.station.solutions/app#orders" target="_blank" rel="noopener">See it on the store board</a>
       <a class="ghost" href="#menu" id="again">Start a new order</a>
       <a class="ghost" href="../">Back to the site</a>
     </div>
@@ -406,7 +406,7 @@ $('tocheck').addEventListener('click', () => { location.hash = '#checkout'; });
 
 /* checkout */
 // The live order endpoint on the Station platform. Empty ws = no platform yet, so the local demo is used.
-const PLATFORM = {base:'https://my.station.solutions', ws:''};
+const PLATFORM = {base:'https://my.station.solutions', ws:'eaf0d369e244d4789baead74'};
 async function sendOrder(s, body){
   if (!PLATFORM.ws) return null;
   const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000);
