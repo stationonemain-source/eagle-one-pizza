@@ -224,6 +224,7 @@ textarea{min-height:70px;resize:vertical}
           <label class="full">Email <small>optional, for your receipt</small><input type="email" id="email" autocomplete="email"></label>
           <label class="full">Notes for the store <small>optional</small><textarea id="notes" placeholder="Well done, cut in squares, ring the bell..."></textarea></label>
           <label class="full" style="display:flex;gap:10px;align-items:flex-start;font-weight:600"><input type="checkbox" id="optin" style="width:18px;height:18px;margin-top:2px;accent-color:#0F2A5F">Text me when my order is ready, and send me Eagle One deals. Reply STOP any time.</label>
+          <label aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">Leave this empty<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
       </div>
       <div class="panel">
@@ -251,6 +252,7 @@ textarea{min-height:70px;resize:vertical}
     <img class="badge" src="../img/badge.png" width="120" height="118" alt="">
     <h1 class="H">Got it, <span id="dname">thanks</span>.</h1>
     <p class="no" id="dno"></p>
+    <p class="no" id="dhow" style="font-weight:500"></p>
     <p id="dwhat"></p>
     <div class="panel"><ul class="lines" id="dlines"></ul><div class="sum" id="dsum"></div></div>
     <p class="why">Demo: no store received this order. In the live version it prints at the store, shows on their order board and the customer gets a text when it&rsquo;s ready.</p>
@@ -329,23 +331,23 @@ const vals = n => [...dlg.querySelectorAll(`input[name="${n}"]:checked`)].map(i 
 function build(){
   const sz = dlg.querySelector('input[name="size"]:checked'), szi = sz ? +sz.value : null;
   const szL = item.opt === 'calzone' ? [['Small',0],['Large',2]] : [['Small',0],['Medium',1],['Large',2]];
-  const parts = []; let unit = item.price, ok = true, why = '';
-  if (szi !== null) { parts.push(szL[szi][0]); unit += szL[szi][1]; }
-  const cr = vals('crust')[0]; if (cr !== undefined) { parts.push(CRUSTS[cr][0] + ' crust'); unit += CRUSTS[cr][1]; }
-  const sa = vals('sauce')[0]; if (sa !== undefined) parts.push(SAUCES[sa] === 'No sauce' ? 'no sauce' : SAUCES[sa] + ' sauce');
+  const parts = [], sel = {item:item.id}; let unit = item.price, ok = true, why = '';
+  if (szi !== null) { sel.size = szL[szi][0]; parts.push(szL[szi][0]); unit += szL[szi][1]; }
+  const cr = vals('crust')[0]; if (cr !== undefined) { sel.crust = CRUSTS[cr][0]; parts.push(CRUSTS[cr][0] + ' crust'); unit += CRUSTS[cr][1]; }
+  const sa = vals('sauce')[0]; if (sa !== undefined) sel.sauce = SAUCES[sa]; if (sa !== undefined) parts.push(SAUCES[sa] === 'No sauce' ? 'no sauce' : SAUCES[sa] + ' sauce');
   const tp = vals('top').map(i => TOPS[i]);
   if (item.opt === 'byo') {
     if (!tp.length) { ok = false; why = 'Pick at least one topping.'; }
     unit += tp.length >= 3 ? 2 : tp.length === 2 ? 1 : 0; // 8.99 / 9.99 / 10.99 on the store menu
     if (tp.length > 3) why = 'Three or more is unlimited, so add all you like.';
   }
-  if (tp.length) parts.push(tp.join(', '));
-  vals('ex').forEach(i => { parts.push(EXTRAS[i][0]); unit += EXTRAS[i][1]; });
-  const st = vals('style')[0]; if (st !== undefined) parts.push(['BBQ','Buffalo','Plain'][st]);
-  const fl = vals('flav')[0]; if (fl !== undefined) parts.push(item.flavors[fl]);
-  const inst = ($('inst') || {}).value; if (inst && inst.trim()) parts.push('Note: ' + inst.trim());
+  if (tp.length) { sel.toppings = tp; parts.push(tp.join(', ')); }
+  sel.extras = vals('ex').map(i => EXTRAS[i][0]); vals('ex').forEach(i => { parts.push(EXTRAS[i][0]); unit += EXTRAS[i][1]; });
+  const st = vals('style')[0]; if (st !== undefined) sel.style = ['BBQ','Buffalo','Plain'][st]; if (st !== undefined) parts.push(['BBQ','Buffalo','Plain'][st]);
+  const fl = vals('flav')[0]; if (fl !== undefined) sel.flavor = item.flavors[fl]; if (fl !== undefined) parts.push(item.flavors[fl]);
+  const inst = ($('inst') || {}).value; if (inst && inst.trim()) sel.note = inst.trim(); if (inst && inst.trim()) parts.push('Note: ' + inst.trim());
   const isLarge = szi !== null && szL[szi][0] === 'Large';
-  return {ok, why, line:{id:item.id, cat:item.cat, pizza:!!item.pizza, large:item.pizza && isLarge, name:item.name, detail:parts.join(' · '), unit:Math.round(unit*100)/100, qty}};
+  return {ok, why, line:{id:item.id, cat:item.cat, pizza:!!item.pizza, large:item.pizza && isLarge, name:item.name, detail:parts.join(' · '), sel, unit:Math.round(unit*100)/100, qty}};
 }
 function price(){ const b = build(); $('qn').textContent = qty; $('addl').textContent = b.ok ? 'Add · ' + money(b.line.unit * qty) : 'Add'; $('addit').disabled = !b.ok; $('dwhy').textContent = b.why; }
 $('coform').addEventListener('input', () => { $('coerr').textContent = ''; });
@@ -403,7 +405,20 @@ $('mbar').addEventListener('click', () => $('cart').scrollIntoView({behavior:'sm
 $('tocheck').addEventListener('click', () => { location.hash = '#checkout'; });
 
 /* checkout */
-$('coform').addEventListener('submit', e => {
+// The live order endpoint on the Station platform. Empty ws = no platform yet, so the local demo is used.
+const PLATFORM = {base:'https://my.station.solutions', ws:''};
+async function sendOrder(s, body){
+  if (!PLATFORM.ws) return null;
+  const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000);
+  try {
+    const r = await fetch(PLATFORM.base + '/order/' + PLATFORM.ws + '/place', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body), signal:ctl.signal});
+    const j = await r.json().catch(() => ({}));
+    if (r.ok && j.ok) return j;
+    if (r.status === 400 || r.status === 429) throw Object.assign(new Error(j.error || 'The order could not be placed.'), {shown:true});
+    return null;
+  } catch (e) { if (e.shown) throw e; return null; } finally { clearTimeout(tm); }
+}
+$('coform').addEventListener('submit', async e => {
   e.preventDefault();
   const name = $('name').value.trim(), phone = $('phone').value.replace(/[^\d]/g,'');
   const bad = [];
@@ -413,14 +428,26 @@ $('coform').addEventListener('submit', e => {
   if (how === 'del' && !$('addr').value.trim()) bad.push('Add the delivery address.');
   $('coerr').textContent = bad.join(' ');
   if (bad.length) return;
-  const s = S[cur], t = priceOrder(cart, s, how);
-  const order = saveOrder({store:s.k, storeName:s.t, how, when:$('when').value, name, phone:phone.slice(-10), email:$('email').value.trim(),
+  const s = S[cur], btn = e.submitter || $('coform').querySelector('[type=submit]');
+  let t = priceOrder(cart, s, how), live = null;
+  if (btn) btn.disabled = true;
+  try {
+    live = await sendOrder(s, {store:s.k, how: how === 'pick' ? 'pick' : 'deliver', when:$('when').value, name, phone:phone.slice(-10), email:$('email').value.trim(),
+      address: how === 'del' ? [$('addr').value.trim(), $('apt').value.trim(), $('zip').value.trim()].filter(Boolean).join(', ') : '',
+      notes:$('notes').value.trim(), text_opt_in:$('optin').checked, website:($('website') || {}).value || '',
+      lines:cart.map(l => Object.assign({}, l.sel, {qty:l.qty}))});
+  } catch (err) { $('coerr').textContent = err.message; if (btn) btn.disabled = false; return; }
+  if (btn) btn.disabled = false;
+  if (live) t = {sub:live.subtotal_cents/100, disc:live.deals.map(d => ({label:d.label, amt:d.cents/100})), total:live.total_cents/100};
+  const order = live ? {no:live.number, when:$('when').value, addr: how === 'del' ? $('addr').value.trim() : ''} : saveOrder({store:s.k, storeName:s.t, how, when:$('when').value, name, phone:phone.slice(-10), email:$('email').value.trim(),
     addr: how === 'del' ? [$('addr').value.trim(), $('apt').value.trim(), $('zip').value.trim()].filter(Boolean).join(', ') : '',
     notes:$('notes').value.trim(), optin:$('optin').checked, pay: how === 'pick' ? 'At pick-up' : 'To the driver', lines:cart, totals:t});
   $('dname').textContent = name.split(' ')[0];
   $('dno').textContent = 'Order #' + order.no + ' · ' + (how === 'pick' ? 'Pick-up' : 'Delivery') + ' · ' + order.when;
   $('dwhat').textContent = how === 'pick' ? `Pick it up at ${s.t}, ${s.a}. Questions? Call ${s.p}.` : `Delivering from ${s.t} to ${order.addr}. Questions? Call ${s.p}.`;
   $('dlines').innerHTML = linesHTML(false); $('dsum').innerHTML = sumHTML(t);
+  $('dhow').textContent = live ? 'Sent to Station’s demo order board (not to the store). The price above is the one the system worked out.'
+    : PLATFORM.ws ? 'We could not reach the order system just now, so this demo order was kept in this browser only.' : 'Demo order, kept in this browser only.';
   cart = []; save(); location.hash = '#done';
 });
 $('again').addEventListener('click', () => { location.hash = '#menu'; });
