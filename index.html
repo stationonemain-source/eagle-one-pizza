@@ -260,7 +260,7 @@ footer{background:var(--navy-2);color:#C9D3EA}
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Eagle One Pizza, top of page"><img src="img/badge.png" width="120" height="118" alt=""><b>Eagle One<br><span>Pizza</span></b></a>
     <nav aria-label="Sections"><a href="#build">Build a pizza</a><a href="#menu">Menu</a><a href="#deals">Deals</a><a href="#stores">Stores</a></nav>
-    <a class="pill js-order" href="#stores" target="_blank" rel="noopener">Order now <i aria-hidden="true">&rarr;</i></a>
+    <a class="pill js-order" href="order/">Order now <i aria-hidden="true">&rarr;</i></a>
   </div>
 </header>
 
@@ -279,7 +279,7 @@ footer{background:var(--navy-2);color:#C9D3EA}
         <button type="button" data-how="del" aria-pressed="false">Delivery</button>
       </div>
       <p class="deal" id="ocdeal" aria-live="polite"></p>
-      <a class="pill red js-order" href="#stores" target="_blank" rel="noopener">Start my order <i aria-hidden="true">&rarr;</i></a>
+      <a class="pill red js-order" href="order/">Start my order <i aria-hidden="true">&rarr;</i></a>
       <p class="now" id="now" aria-live="polite">&nbsp;</p>
     </form>
     <p class="stars"><b>&#9733; 4.6</b> from 2,196 Google reviews at SW OKC &amp; Moore</p>
@@ -340,7 +340,7 @@ footer{background:var(--navy-2);color:#C9D3EA}
         <div class="tot"><span>Total</span><span id="total">$0.00</span></div>
         <p class="fine">Before tax. Pick-up deals come off when you order online.</p>
         <div class="acts">
-          <a class="pill red js-order" href="#stores" target="_blank" rel="noopener">Order it online <i aria-hidden="true">&rarr;</i></a>
+          <a class="pill red" href="order/" id="toorder">Order it online <i aria-hidden="true">&rarr;</i></a>
           <div class="row2"><a class="ghost js-call" href="#stores">Call it in</a><button type="button" class="ghost" id="copy">Copy order</button></div>
           <p class="msg" id="copied" aria-live="polite"></p>
         </div>
@@ -372,7 +372,7 @@ footer{background:var(--navy-2);color:#C9D3EA}
       <h2 class="H">Dinner&rsquo;s <span>sorted.</span></h2>
       <p>35% off every pizza when you order online for pick-up, at all seven stores.</p>
       <div class="btns">
-        <a class="pill red js-order" href="#stores" target="_blank" rel="noopener">Order now <i aria-hidden="true">&rarr;</i></a>
+        <a class="pill red js-order" href="order/">Order now <i aria-hidden="true">&rarr;</i></a>
         <a class="ghost js-call" href="#stores">Call <span class="js-phone" style="margin-left:6px">405-703-4555</span></a>
       </div>
     </div>
@@ -399,17 +399,18 @@ footer{background:var(--navy-2);color:#C9D3EA}
   </div>
   <div class="fbar">
     <div class="wrap">
-      <p class="fine">Preview prepared by Station for Eagle One Pizza. Photos are the stores&rsquo; own. Prices and deals were read from each store&rsquo;s online ordering page on 5 November 2026; ordering is handled there. Not yet the official website.</p>
+      <p class="fine">Preview prepared by Station for Eagle One Pizza. Photos are the stores&rsquo; own. Prices and deals were read from each store&rsquo;s online ordering page on 5 November 2026. Online ordering here is a working demo: no order reaches a store yet. Not yet the official website.</p>
       <div class="row"><span>&copy; 2026 Eagle One Pizza &middot; Designed by <a href="https://station.solutions/" target="_blank" rel="noopener">Station.Solutions</a></span><a class="up" href="#top">Back to top &uarr;</a></div>
     </div>
   </div>
 </footer>
 
-<div class="dock"><a class="pill red js-order" href="#stores" target="_blank" rel="noopener">Order now <i aria-hidden="true">&rarr;</i></a><a class="ghost js-call" href="#stores">Call</a></div>
+<div class="dock"><a class="pill red js-order" href="order/">Order now <i aria-hidden="true">&rarr;</i></a><a class="ghost js-call" href="#stores">Call</a></div>
 
 <script>
 (() => {
-const ORDER = id => 'https://www.foodbooking.com/ordering/?restaurant_uid=' + id;
+// Our own ordering page (order/) replaces the hand-off to GloriaFood.
+const ORDER = s => 'order/?store=' + s.k + (how === 'del' ? '&how=del' : '');
 const STD = [[10,21],[10,21],[10,21],[10,21],[10,22],[10,22],[11,21]]; // Monday first
 const S = [
   {k:'swokc', t:'SW OKC & Moore', a:'11613 S Western Ave', c:'Oklahoma City 73170', p:'405-703-4555', u:'2f01958e-10c9-4970-ab8d-c373049e5209', h:[[10,22],[10,22],[10,22],[10,22],[10,22],[10,22],[10,22]]},
@@ -489,11 +490,11 @@ const tel = p => 'tel:+1' + p.replace(/-/g,'');
 function render(){
   const s = S[cur], n = today(s), {d} = clock();
   sel.value = String(cur);
-  document.querySelectorAll('.js-order').forEach(a => a.href = ORDER(s.u));
+  document.querySelectorAll('.js-order').forEach(a => a.href = ORDER(s));
   document.querySelectorAll('.js-call').forEach(a => a.href = tel(s.p));
   $('now').innerHTML = `<b class="${n.open ? '' : 'closed'}">${n.txt}</b> &middot; <a href="${tel(s.p)}">${s.p}</a>`;
   $('ocdeal').textContent = how === 'pick' ? 'Pick-up online: 35% off every pizza' + (s.k === 'swokc' ? ', plus 10% off wings, calzones, salads and drinks.' : '.') : (s.k === 'norman' ? 'Delivery: 10% off your first online order.' : 'Delivery: two large pizzas get free bread sticks or cinnamon sticks.');
-  $('forder').innerHTML = S.map(s => `<li><a href="${ORDER(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></li>`).join('');
+  $('forder').innerHTML = S.map(s => `<li><a href="${ORDER(s)}">${esc(s.t)}</a></li>`).join('');
   $('fcall').innerHTML = S.map(s => { const n = today(s); return `<li><a class="tel" href="${tel(s.p)}" title="${n.txt}"><span class="dot${n.open ? '' : ' closed'}"></span><span>${s.p}<small>${esc(s.t)}</small></span></a></li>`; }).join('');
   document.querySelectorAll('.js-phone').forEach(e => e.textContent = s.p);
   $('tkstore').textContent = s.t + ' · ' + (how === 'pick' ? 'pick-up' : 'delivery') + ' · ' + s.p;
@@ -505,7 +506,7 @@ function render(){
       <a class="ph" href="${tel(s.p)}">${s.p}</a>
       <div class="addr">${esc(s.a)}, ${esc(s.c)}${s.x ? ' &middot; ' + s.x : ''}</div>
       <div class="today"><b class="${n.open ? '' : 'closed'}">${n.txt}</b></div>
-      <div class="acts"><a class="o" href="${ORDER(s.u)}" target="_blank" rel="noopener">Order</a><a class="m" href="${map}" target="_blank" rel="noopener">Map</a>${i===cur ? '' : `<button type="button" class="use" data-pick="${i}">Make this my store</button>`}</div>
+      <div class="acts"><a class="o" href="${ORDER(s)}">Order</a><a class="m" href="${map}" target="_blank" rel="noopener">Map</a>${i===cur ? '' : `<button type="button" class="use" data-pick="${i}">Make this my store</button>`}</div>
       <details><summary>All hours</summary><table><tbody>${rows}</tbody></table></details>
     </div>`; }).join('');
 }
@@ -573,6 +574,15 @@ document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click'
 }));
 $('addbtn').addEventListener('click', () => { const c = current(); if (c.price === null) return; lines.push(c); draw(); $('copied').textContent = 'In the box. ' + lines.length + (lines.length === 1 ? ' item.' : ' items.'); });
 $('lines').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (b) { lines.splice(+b.dataset.del,1); draw(); $('copied').textContent = ''; } });
+$('toorder').addEventListener('click', e => {
+  e.preventDefault();
+  try {
+    const have = JSON.parse(localStorage.getItem('eop-cart') || '[]');
+    lines.forEach(l => have.push({id:'home', cat:/build your own/.test(l.name) ? 'Pizza' : 'Specialty pizzas', pizza:true, large:/^large|, large$/i.test(l.name), name:l.name, detail:l.detail, unit:l.price, qty:1}));
+    localStorage.setItem('eop-cart', JSON.stringify(have)); localStorage.setItem('eop-store', S[cur].k);
+  } catch (err) {}
+  location.href = ORDER(S[cur]) + '#checkout';
+});
 $('copy').addEventListener('click', async () => {
   if (!lines.length) { $('copied').textContent = 'Your box is empty.'; return; }
   const txt = 'Eagle One Pizza, ' + S[cur].t + ' (' + (how === 'pick' ? 'pick-up' : 'delivery') + ')\n' + lines.map(l => '- ' + l.name + ': ' + l.detail + ' ' + money(l.price)).join('\n');
