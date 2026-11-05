@@ -275,7 +275,7 @@ footer .fine{font-size:13.5px;color:#B4C2DE;max-width:92ch}
     </div>
     <figure class="lid-photo">
       <img src="img/pepperoni-box.jpg" width="1024" height="1024" alt="A large pepperoni pizza in an open Eagle One box">
-      <figcaption>Large pepperoni, $8.99 with one topping at SW OKC &amp; Moore.</figcaption>
+      <figcaption>Pepperoni, one topping: $8.99 small, $10.99 large at SW OKC &amp; Moore.</figcaption>
     </figure>
   </div>
 </div>
@@ -293,11 +293,12 @@ footer .fine{font-size:13.5px;color:#B4C2DE;max-width:92ch}
 
 <section id="build" aria-labelledby="build-h">
   <div class="wrap">
-    <div class="sh"><h2 id="build-h">Write up your pie.</h2><p>Fill in the slip the way you&rsquo;d say it at the counter. Prices are the large carry-out prices from the menu below.</p></div>
+    <div class="sh"><h2 id="build-h">Write up your pie.</h2><p>Fill in the slip the way you&rsquo;d say it at the counter. Prices come from the store&rsquo;s own online menu.</p></div>
     <div class="pad-grid">
       <form class="pad" id="pad" onsubmit="return false">
         <h3>Order slip <small id="slipno"></small></h3>
         <p class="skip">Know what you want? <a class="js-order" href="#stores" target="_blank" rel="noopener">Skip the slip and order online</a>.</p>
+        <fieldset style="margin-top:12px"><legend>Size</legend><div class="ticks" id="size"></div></fieldset>
         <div class="mode" role="group" aria-label="Kind of pizza">
           <button type="button" data-mode="own" aria-pressed="true">Build your own</button>
           <button type="button" data-mode="spec" aria-pressed="false">House specialty</button>
@@ -305,11 +306,11 @@ footer .fine{font-size:13.5px;color:#B4C2DE;max-width:92ch}
         <div id="own">
           <fieldset><legend>Crust</legend><div class="ticks" id="crust"></div></fieldset>
           <fieldset><legend>Sauce</legend><div class="ticks" id="sauce"></div></fieldset>
-          <fieldset><legend>Toppings <small>&middot; 1 is $8.99, 2 is $9.99, 3 or more is $10.99</small></legend><div class="ticks" id="tops"></div></fieldset>
+          <fieldset><legend>Toppings <small>&middot; small: 1 is $8.99, 2 is $9.99, 3 or more is $10.99</small></legend><div class="ticks" id="tops"></div></fieldset>
           <fieldset><legend>Extras</legend><div class="ticks"><label><input type="checkbox" id="xcheese"><span>Extra cheese, +$3.00</span></label></div></fieldset>
         </div>
         <div id="spec" hidden>
-          <fieldset><legend>Large specialty <small>&middot; $10.99 each</small></legend><div class="ticks specs" id="specs"></div></fieldset>
+          <fieldset><legend>House specialty <small>&middot; $10.99 small</small></legend><div class="ticks specs" id="specs"></div></fieldset>
         </div>
         <div class="add">
           <span class="price" id="price">&nbsp;</span>
@@ -322,7 +323,7 @@ footer .fine{font-size:13.5px;color:#B4C2DE;max-width:92ch}
         <p class="store" id="tkstore"></p>
         <ol id="lines"></ol>
         <div class="tot"><span>Total</span><span id="total">$0.00</span></div>
-        <p class="fine">Before tax and deals. Crust upcharges and cheese-only prices are set by each store.</p>
+        <p class="fine">Before tax and deals. Cheese-only prices are set by each store.</p>
         <div class="acts">
           <a class="btn js-order" href="#stores" target="_blank" rel="noopener">Order it online</a>
           <a class="btn ghost js-call" href="#stores">Call it in</a>
@@ -343,18 +344,19 @@ footer .fine{font-size:13.5px;color:#B4C2DE;max-width:92ch}
       </div>
       <div class="cols">
         <div class="cat">
-          <h3>Large pizza</h3>
+          <h3>Pizza</h3>
+          <p class="note">Small prices shown. Medium +$1, large +$2.</p>
           <div class="it"><b>One topping</b><span class="dots"></span><span class="p">$8.99</span></div>
           <div class="it"><b>Two toppings</b><span class="dots"></span><span class="p">$9.99</span></div>
           <div class="it"><b>Unlimited toppings</b><span class="dots"></span><span class="p">$10.99</span></div>
           <div class="it"><b>Cauliflower crust, unlimited</b><span class="dots"></span><span class="p">$13.99</span></div>
           <div class="it"><b>Extra cheese</b><span class="dots"></span><span class="p">$3.00</span></div>
-          <p class="plain" style="margin-top:10px"><b>Crusts:</b> hand tossed, thin, stuffed, gluten-free, cauliflower.<br><b>Sauces:</b> marinara, Alfredo, BBQ, buffalo, olive oil.</p>
+          <p class="plain" style="margin-top:10px"><b>Crusts:</b> hand tossed, thin, gluten-free +$4, stuffed +$5, cauliflower.<br><b>Sauces:</b> marinara, Alfredo, BBQ, garlic butter, olive oil, or none.</p>
           <p class="plain" style="margin-top:8px"><b>Toppings:</b> pepperoni, sausage, beef, Canadian bacon, Italian sausage, bacon, chicken, gyro meat, anchovies, onions, mushrooms, bell peppers, black olives, green olives, tomatoes, jalape&ntilde;os, banana peppers, spinach, pineapple.</p>
         </div>
         <div class="cat">
           <h3>Specialty pizzas</h3>
-          <p class="note">Large, $10.99 each</p>
+          <p class="note">$10.99 each, small. Medium +$1, large +$2.</p>
           <div id="speclist"></div>
         </div>
         <div class="cat">
@@ -454,8 +456,10 @@ const S = [
   {k:'holden', t:'Holdenville', a:'101 E Highway St', c:'Holdenville 74848', p:'405-379-2900', u:'9ecad18c-13fe-4769-a1ae-4721fb59e6ab', h:STD},
 ];
 // The menu, once: the order slip and the printed menu both read from here.
-const CRUSTS = ['Hand tossed','Thin','Stuffed','Gluten-free','Cauliflower'];
-const SAUCES = ['Marinara','Alfredo','BBQ','Buffalo','Olive oil'];
+const SIZES = [['Small',0],['Medium',1],['Large',2]];
+const CRUSTS = ['Hand tossed','Thin','Gluten-free','Stuffed','Cauliflower'];
+const CRUST_UP = {'Gluten-free':4,'Stuffed':5};
+const SAUCES = ['Marinara','Alfredo','BBQ','Garlic butter','Olive oil','No sauce'];
 const TOPS = ['Pepperoni','Sausage','Beef','Canadian bacon','Italian sausage','Bacon','Chicken','Gyro meat','Anchovies','Onions','Mushrooms','Bell peppers','Black olives','Green olives','Tomatoes','Jalapeños','Banana peppers','Spinach','Pineapple'];
 const SPECS = [
   ['The Works','Pepperoni, sausage, beef, Canadian bacon, onions, green peppers, mushrooms, black olives, extra cheese'],
@@ -522,7 +526,8 @@ render(); setInterval(render, 60000);
 
 /* order slip */
 const tick = (name, type, list, checked) => list.map((v,i) => `<label><input type="${type}" name="${name}" value="${esc(v)}"${i===checked?' checked':''}><span>${esc(v)}</span></label>`).join('');
-$('crust').innerHTML = tick('crust','radio',CRUSTS,0);
+$('size').innerHTML = SIZES.map(([n,u],i) => `<label><input type="radio" name="size" value="${i}"${i===2?' checked':''}><span>${n}${u ? ', +$' + u : ''}</span></label>`).join('');
+$('crust').innerHTML = tick('crust','radio',CRUSTS.map(c => CRUST_UP[c] ? c + ', +$' + CRUST_UP[c] : c),0);
 $('sauce').innerHTML = tick('sauce','radio',SAUCES,0);
 $('tops').innerHTML = tick('top','checkbox',TOPS,-1);
 $('specs').innerHTML = SPECS.map(([n,d],i) => `<label><input type="radio" name="spec" value="${i}"${i===0?' checked':''}><span><b>${n}</b><em>${d}</em></span></label>`).join('');
@@ -531,8 +536,10 @@ let mode = 'own';
 const lines = [];
 const val = n => (document.querySelector(`input[name="${n}"]:checked`) || {}).value;
 function current(){
-  if (mode === 'spec') { const [n,d] = SPECS[+val('spec')]; return {name:n + ', large', detail:d, price:10.99}; }
-  const crust = val('crust'), sauce = val('sauce');
+  const [sz,up] = SIZES[+val('size')];
+  if (mode === 'spec') { const [n,d] = SPECS[+val('spec')]; return {name:n + ', ' + sz.toLowerCase(), detail:d, price:10.99 + up}; }
+  const crustLabel = val('crust'), crustName = crustLabel.split(',')[0];
+  const crust = crustName, sauce = val('sauce');
   const tops = [...document.querySelectorAll('input[name="top"]:checked')].map(i => i.value);
   const x = $('xcheese').checked;
   let price = null, why = '';
@@ -541,9 +548,9 @@ function current(){
   else if (tops.length === 2) price = 9.99;
   else if (tops.length >= 3) price = 10.99, why = tops.length > 3 ? 'Unlimited toppings, so add all you like.' : '';
   else why = 'Cheese only? Your store sets that price. Pick a topping to see one here.';
-  if (price !== null && x) price += 3;
+  if (price !== null) price += up + (CRUST_UP[crust] || 0) + (x ? 3 : 0);
   const detail = [crust + ' crust', sauce + ' sauce', tops.length ? tops.join(', ') : 'cheese only', x ? 'extra cheese' : ''].filter(Boolean).join(' · ');
-  return {name:'Large, build your own', detail, price, why};
+  return {name:sz + ', build your own', detail, price, why};
 }
 function draw(){
   const c = current();
