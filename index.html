@@ -273,10 +273,10 @@ footer{background:var(--paper)}
 
 <div class="band" id="deals">
   <div class="track" aria-hidden="true">
-    <span>Pick-up: <em>35% off pizza</em></span><span>&#9733;</span><span>Pick-up: <em>10% off</em> wings, sandwiches, calzones, salads &amp; drinks</span><span>&#9733;</span><span>2 large on delivery: <em>free bread or cinnamon sticks</em></span><span>&#9733;</span><span><em>10% off</em> your first online order</span><span>&#9733;</span>
-    <span>Pick-up: <em>35% off pizza</em></span><span>&#9733;</span><span>Pick-up: <em>10% off</em> wings, sandwiches, calzones, salads &amp; drinks</span><span>&#9733;</span><span>2 large on delivery: <em>free bread or cinnamon sticks</em></span><span>&#9733;</span><span><em>10% off</em> your first online order</span><span>&#9733;</span>
+    <span>Pick-up: <em>35% off pizza</em></span><span>&#9733;</span><span>SW OKC &amp; Moore pick-up: <em>10% off</em> wings, calzones, salads &amp; drinks</span><span>&#9733;</span><span>2 large on delivery: <em>free bread or cinnamon sticks</em> (not Norman)</span><span>&#9733;</span><span><em>10% off</em> your first online order</span><span>&#9733;</span>
+    <span>Pick-up: <em>35% off pizza</em></span><span>&#9733;</span><span>SW OKC &amp; Moore pick-up: <em>10% off</em> wings, calzones, salads &amp; drinks</span><span>&#9733;</span><span>2 large on delivery: <em>free bread or cinnamon sticks</em> (not Norman)</span><span>&#9733;</span><span><em>10% off</em> your first online order</span><span>&#9733;</span>
   </div>
-  <p class="sr">Deals online: 35% off pizza on pick-up. 10% off wings, sandwiches, calzones, salads and drinks on pick-up. Two large pizzas on delivery get free bread sticks or cinnamon sticks. 10% off your first online order.</p>
+  <p class="sr">Deals online: 35% off pizza on pick-up at every store. At SW OKC and Moore, 10% off wings, sandwiches, calzones, salads and drinks on pick-up. Two large pizzas on delivery get free bread sticks or cinnamon sticks, at every store except Norman. 10% off your first online order.</p>
 </div>
 
 <section class="build" id="build" aria-labelledby="build-h">
@@ -437,7 +437,7 @@ function render(){
   document.querySelectorAll('.js-order').forEach(a => a.href = ORDER(s.u));
   document.querySelectorAll('.js-call').forEach(a => a.href = tel(s.p));
   $('now').innerHTML = `<b class="${n.open ? '' : 'closed'}">${n.txt}</b> &middot; <a href="${tel(s.p)}">${s.p}</a>`;
-  $('ocdeal').textContent = how === 'pick' ? 'Pick-up online: 35% off pizza, 10% off wings, calzones, salads and drinks.' : 'Delivery: two large pizzas get free bread sticks or cinnamon sticks.';
+  $('ocdeal').textContent = how === 'pick' ? 'Pick-up online: 35% off every pizza' + (s.k === 'swokc' ? ', plus 10% off wings, calzones, salads and drinks.' : '.') : (s.k === 'norman' ? 'Delivery: 10% off your first online order.' : 'Delivery: two large pizzas get free bread sticks or cinnamon sticks.');
   $('tkstore').textContent = s.t + ' · ' + (how === 'pick' ? 'pick-up' : 'delivery') + ' · ' + s.p;
   $('list').innerHTML = S.map((s,i) => [s,i]).sort((a,b) => (b[1]===cur) - (a[1]===cur)).map(([s,i]) => { const n = today(s);
     const rows = DAY.map((dn,j) => `<tr${j===d?' class="t"':''}><td>${dn}</td><td>${s.h[j] ? h12(s.h[j][0]) + ' – ' + h12(s.h[j][1]) : 'Closed'}</td></tr>`).join('');
